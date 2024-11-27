@@ -149,6 +149,7 @@ export default function ProductCreateRoute(){
                                 value={images} 
                                 key={fields.images.key} 
                                 name={fields.images.name}
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 defaultValue={fields.images.initialValue as any}
                                 />
                             {images.length > 0 ? (
@@ -159,6 +160,7 @@ export default function ProductCreateRoute(){
                                             height={100} 
                                             width={100} 
                                             src={image} 
+                                            key={image}
                                             alt="Product Image"
                                             className="w-full h-full object-cover rounded-lg border"
                                         />

@@ -16,6 +16,7 @@ export async function POST(req: Request){
             signature,
             process.env.STRIPE_SECRET_WEBHOOK as string
         );
+        // eslint-disable-next-line no-unused-vars
     } catch(error: unknown){
         return new Response("Webhook Error",{status: 400});
     }

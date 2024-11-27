@@ -9,6 +9,7 @@ export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
   imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 10} })
     // Set permissions and file types for this FileRoute
+    // eslint-disable-next-line no-unused-vars
     .middleware(async ({ req }) => {
         const {getUser} = getKindeServerSession()
         const user = await getUser();
@@ -31,6 +32,7 @@ export const ourFileRouter = {
 
     bannerImageRoute: f({ image: { maxFileSize: "4MB", maxFileCount: 1} })
     // Set permissions and file types for this FileRoute
+    // eslint-disable-next-line no-unused-vars
     .middleware(async ({ req }) => {
         const {getUser} = getKindeServerSession()
         const user = await getUser();
