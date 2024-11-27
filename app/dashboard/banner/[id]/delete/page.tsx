@@ -4,8 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
-
-export default function deleteBannerRoute({params}: {params: {id: string}}){
+interface Params{
+    id: string;
+}
+export default async  function deleteBannerRoute({
+    params,
+}:{
+    params: Promise<Params>;
+}){
+    const {id} =  await params;
     return (
         <div className="h-[80vh] w-full flex items-center justify-center">
             <Card className="max-w-xl">
@@ -19,7 +26,7 @@ export default function deleteBannerRoute({params}: {params: {id: string}}){
                 <CardFooter className="w-full flex justify-between">
                     <Button variant="secondary" asChild><Link href="/dashboard/banner">Abandonner</Link></Button>
                     <form action={deleteBanner}>
-                        <input type="hidden" name="bannerId" value={params.id}/>
+                        <input type="hidden" name="bannerId" value={id}/>
                         <SubmitButton  variant="destructive" text="Delete"/>
                     </form>
                 </CardFooter>

@@ -89,12 +89,20 @@ async function getData(productCategory: string){
     }
 }
 
+interface Params{
+    name: string;
+  }
 
-export default async function CategoriesPage({params}: {params: {name : string}}){
+
+export default async function CategoriesPage({
+    params,
+}:{
+    params: Promise<Params>;
+}){
 
     noStore();
-
-    const {data, title} = await getData(params.name)
+    const {name} = await params;
+    const {data, title} = await getData(name)
     return(
         <section>
             <h1 className="text-3xl font-semibold my-5 ml-10">{title}</h1>
