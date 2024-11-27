@@ -37,7 +37,7 @@ interface PageProps {
 
 export default async function ProductIdRoute({
   params,
-}: PageProps) {
+}: { params: { id: string } }) {
   noStore();
   const data = await getData(params.id);
   const addProducttoShoppingCart = addItem.bind(null, data.id);
