@@ -31,11 +31,11 @@ async function getData(productId: string){
 
 export default async function ProductIdRoute({
     params,
-    }:{
-        params: {id: string};
-    }){
-    const data = await getData(params.id);
-    const addProductToShoppingCart = addItem.bind(null, data.id)
+  }: {
+    params: { id: string }; // Type attendu pour un paramètre dynamique
+  }) {
+    const data = await getData(params.id); // Récupérer les données
+    const addProductToShoppingCart = addItem.bind(null, data.id);
     return(
         <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
