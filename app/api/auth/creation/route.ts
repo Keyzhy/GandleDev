@@ -31,5 +31,5 @@ export async function GET() {
         });
     }
 
-    return NextResponse.redirect('process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "https://gandle-dev-o7d7-q9k8kzk79-yannis-projects-8f2db8f0.vercel.app/"');
+    return NextResponse.redirect('process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "https://gandle-dev.vercel.app/"');
 }
