@@ -175,6 +175,7 @@ export function EditForm({ data }: iAppProps){
                                             height={100} 
                                             width={100} 
                                             src={image} 
+                                            key={image}
                                             alt="Product Image"
                                             className="w-full h-full object-cover rounded-lg border"
                                         />
