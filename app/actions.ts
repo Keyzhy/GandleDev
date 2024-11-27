@@ -264,8 +264,8 @@ export async function checkOut(){
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
             line_items: lineItems,
-            success_url:'http://localhost:3000/payment/success',
-            cancel_url: 'http://localhost:3000/payment/cancel',
+            success_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/success' : 'https://gandle-dev-o7d7-q9k8kzk79-yannis-projects-8f2db8f0.vercel.app/payment/success',
+            cancel_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/cancel' : 'https://gandle-dev-o7d7-q9k8kzk79-yannis-projects-8f2db8f0.vercel.app/payment/cancel',
             metadata:{
                 userId: user.id,
             }
