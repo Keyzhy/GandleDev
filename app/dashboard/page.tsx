@@ -46,7 +46,7 @@ export default async function Dashboard(){
             <Card className="xl:col-span-2">
                 <CardHeader>
                     <CardTitle>Transactions</CardTitle>
-                    <CardDescription>Transactions récentes de la boutiqe</CardDescription>
+                    <CardDescription>Transactions récentes depuis les 7 derniers jours</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <Chart data={data}/>
