@@ -43,7 +43,7 @@ export async function createProduct(previousState: unknown, formData: FormData) 
 
     redirect("/dashboard/products");
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function editProduct( previousState: any, formData: FormData){
     const {getUser} = getKindeServerSession()
     const user = await getUser()
@@ -99,7 +99,7 @@ export async function deleteProduct( formData: FormData){
 
     redirect('/dashboard/products');
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function createBanner(previousState: any, formData: FormData) {
     const {getUser} = getKindeServerSession()
     const user = await getUser();
@@ -150,7 +150,7 @@ export async function addItem(productId: string){
     if(!user){
         return redirect("/");
     }
-    
+    // eslint-disable-next-line prefer-const
     let cart: Cart | null = await redis.get(`cart-${user.id}`);
 
     const selectedProduct = await prisma.product.findUnique({
@@ -220,7 +220,7 @@ export async function deleteItem(formData: FormData) {
     }
 
     const productId = formData.get('productId')
-
+// eslint-disable-next-line prefer-const
     let cart: Cart| null = await redis.get(`cart-${user.id}`);
 
     if(cart && cart.items){
@@ -242,7 +242,7 @@ export async function checkOut(){
     if(!user){
         return redirect("/");
     }
-    
+    // eslint-disable-next-line prefer-const
     let cart: Cart | null = await redis.get(`cart-${user.id}`);
 
     if(cart && cart.items){
