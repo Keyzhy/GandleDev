@@ -29,15 +29,10 @@ async function getData(productId: string) {
   return data;
 }
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
 
 export default async function ProductIdRoute({
   params,
-}: PageProps) {
+}: { params: { id: string } }) {
   noStore();
   const data = await getData(params.id);
   const addProducttoShoppingCart = addItem.bind(null, data.id);
@@ -64,10 +59,10 @@ export default async function ProductIdRoute({
           </form>
         </div>
       </div>
-
       <div className="mt-16">
         <FeaturedProducts />
       </div>
     </>
   );
 }
+      
