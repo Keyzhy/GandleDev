@@ -170,12 +170,11 @@ export function EditForm({ data }: iAppProps){
                             {images.length > 0 ? (
                                 <div className="flex gap-5">
                                    {images.map((image,index)=>(
-                                    <div className="relative w-[100px] h-[100px]">
+                                    <div key={index} className="relative w-[100px] h-[100px]">
                                         <Image 
                                             height={100} 
                                             width={100} 
                                             src={image} 
-                                            key={image}
                                             alt="Product Image"
                                             className="w-full h-full object-cover rounded-lg border"
                                         />
