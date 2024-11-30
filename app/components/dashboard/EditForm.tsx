@@ -135,7 +135,7 @@ export function EditForm({ data }: iAppProps){
                                     <SelectItem value="horsStock">Hors Stock</SelectItem>
                                     <SelectItem value="delaiAppro">En attente</SelectItem>
                                     <SelectItem value="prepa">En préparation</SelectItem>
-                                    <SelectItem value="attenteEnvoi">En attente d'envoi</SelectItem>
+                                    <SelectItem value="attenteEnvoi">En attente d`&apos;`envoi</SelectItem>
                                     <SelectItem value="communiqueTransporteur">Communiqué au transporteur</SelectItem>
                                 </SelectContent>
                             </Select>

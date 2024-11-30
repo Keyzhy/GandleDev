@@ -120,7 +120,7 @@ export default function ProductCreateRoute(){
                                     <SelectItem value="horsStock">Hors Stock</SelectItem>
                                     <SelectItem value="delaiAppro">Delai Approvisionnement</SelectItem>
                                     <SelectItem value="prepa">En préparation</SelectItem>
-                                    <SelectItem value="attenteEnvoi">Attente Envoi</SelectItem>
+                                    <SelectItem value="attenteEnvoi">Attente d`&apos;`nvoi</SelectItem>
                                     <SelectItem value="communiqueTransporteur">Communiqué au Transporteur</SelectItem>
                                 </SelectContent>
                             </Select>
