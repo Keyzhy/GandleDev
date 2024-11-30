@@ -24,7 +24,7 @@ export function CategoriesSelection(){
                     />
                     <div className="bg-gradient-to-b from-transparent to-black opacity-55"/>
                     <div className="p-6 flex items-end">
-                        <Link href="/products/all">
+                        <Link href="/products/bougies">
                             <h3 className="text-white font-semibold">Bougies</h3>
                             <p className="mt-1 text-sm text-white">test test</p>
                         </Link>

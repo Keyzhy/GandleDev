@@ -63,6 +63,11 @@ enum ProductStatus{
   brouillon
   publie
   archived
+  horsStock
+  delaiAppro
+  prepa
+  attenteEnvoi
+  communiqueTransporteur
 }
 
 enum Category{

@@ -132,6 +132,11 @@ export function EditForm({ data }: iAppProps){
                                     <SelectItem value="brouillon">Brouillon</SelectItem>
                                     <SelectItem value="publie">Publier</SelectItem>
                                     <SelectItem value="archived">Archivé</SelectItem>
+                                    <SelectItem value="horsStock">Hors Stock</SelectItem>
+                                    <SelectItem value="delaiAppro">En attente</SelectItem>
+                                    <SelectItem value="prepa">En préparation</SelectItem>
+                                    <SelectItem value="attenteEnvoi">En attente d'envoi</SelectItem>
+                                    <SelectItem value="communiqueTransporteur">Communiqué au transporteur</SelectItem>
                                 </SelectContent>
                             </Select>
                             <p className="text-red-500">{fields.status.errors}</p>
