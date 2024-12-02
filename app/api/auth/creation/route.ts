@@ -7,6 +7,8 @@ export async function GET() {
     noStore();
     const {getUser} = getKindeServerSession();
     const user = await getUser();
+    const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "https://gandle-dev.vercel.app";
+    const redirectUrl = `${baseUrl}/api/auth/callback`;
 
     if(!user || user === null || !user.id){
         throw new Error('Sometin went wrong...');
@@ -31,5 +33,5 @@ export async function GET() {
         });
     }
 
-    return NextResponse.redirect('process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "https://gandle-dev.vercel.app"');
+    return NextResponse.redirect(redirectUrl);
 }
