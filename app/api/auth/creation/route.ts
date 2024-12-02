@@ -8,7 +8,7 @@ export async function GET() {
     const {getUser} = getKindeServerSession();
     const user = await getUser();
     const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "https://gandle-dev.vercel.app";
-    const redirectUrl = `${baseUrl}/api/auth/callback`;
+    const redirectUrl = `${baseUrl}/api/auth/kinde_callback`;
 
     if(!user || user === null || !user.id){
         throw new Error('Sometin went wrong...');
