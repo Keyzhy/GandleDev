@@ -31,5 +31,5 @@ export async function GET() {
         });
     }
 
-    return NextResponse.redirect('process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "https://gandle-dev.vercel.app/"');
+    return NextResponse.redirect('process.env.NODE_ENV === "development" ? "http://localhost:3000/" : "https://gandle-dev.vercel.app"');
 }
