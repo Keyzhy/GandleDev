@@ -42,6 +42,7 @@ export default async function ProductsRoute(){
                                 <TableHead>Image</TableHead>
                                 <TableHead>Nom</TableHead>
                                 <TableHead>Status</TableHead>
+                                <TableHead>Parfum</TableHead>
                                 <TableHead>Prix</TableHead>
                                 <TableHead>Stock</TableHead>
                                 <TableHead>Date</TableHead>
@@ -56,6 +57,7 @@ export default async function ProductsRoute(){
                                 </TableCell>
                                 <TableCell>{item.name}</TableCell>
                                 <TableCell className="text-green-600">{item.status}</TableCell>
+                                <TableCell>{item.parfum}</TableCell>
                                 <TableCell>{item.price} €</TableCell>
                                 <TableCell>{item.stock}</TableCell>
                                 <TableCell>{new Intl.DateTimeFormat("en-GB").format(item.createdAt)}</TableCell>

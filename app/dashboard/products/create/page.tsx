@@ -117,14 +117,33 @@ export default function ProductCreateRoute(){
                                     <SelectItem value="brouillon">Brouillon</SelectItem>
                                     <SelectItem value="publie">Publier</SelectItem>
                                     <SelectItem value="archived">Archivé</SelectItem>
-                                    <SelectItem value="horsStock">Hors Stock</SelectItem>
-                                    <SelectItem value="delaiAppro">Delai Approvisionnement</SelectItem>
-                                    <SelectItem value="prepa">En préparation</SelectItem>
-                                    <SelectItem value="attenteEnvoi">Attente d`&apos;`nvoi</SelectItem>
-                                    <SelectItem value="communiqueTransporteur">Communiqué au Transporteur</SelectItem>
                                 </SelectContent>
                             </Select>
                             <p className="text-red-500">{fields.status.errors}</p>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <Label className=" text-l text-bold">Parfum</Label>
+                            <Input 
+                                type="text"
+                                key={fields.parfum.key}
+                                name={fields.parfum.name}
+                                defaultValue={fields.parfum.initialValue}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <p className="text-red-500">{fields.parfum.errors}</p>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <Label className=" text-l text-bold">Composition</Label>
+                            <Input 
+                                type="text"
+                                key={fields.composition.key}
+                                name={fields.composition.name}
+                                defaultValue={fields.composition.initialValue}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <p className="text-red-500">{fields.composition.errors}</p>
                         </div>
 
                         <div className="flex flex-col gap-3">

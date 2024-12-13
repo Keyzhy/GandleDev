@@ -33,6 +33,8 @@ export async function createProduct(previousState: unknown, formData: FormData) 
             name: submission.value.name,
             description: submission.value.description,
             status: submission.value.status,
+            parfum: submission.value.parfum,
+            composition: submission.value.composition,
             price: submission.value.price,
             images: flattenUrls,
             stock: submission.value.stock,
@@ -70,6 +72,8 @@ export async function editProduct( previousState: any, formData: FormData){
         data:{
             name: submission.value.name,
             description: submission.value.description,
+            parfum: submission.value.parfum,
+            composition: submission.value.composition,
             category: submission.value.category,
             price: submission.value.price,
             stock: submission.value.stock,

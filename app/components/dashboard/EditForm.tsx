@@ -25,6 +25,8 @@ interface iAppProps {
         name: string;
         description: string;
         status: $Enums.ProductStatus;
+        parfum: string;
+        composition: string;
         price: number;
         images: string[];
         stock: number;
@@ -131,15 +133,32 @@ export function EditForm({ data }: iAppProps){
                                 <SelectContent>
                                     <SelectItem value="brouillon">Brouillon</SelectItem>
                                     <SelectItem value="publie">Publier</SelectItem>
-                                    <SelectItem value="archived">Archivé</SelectItem>
-                                    <SelectItem value="horsStock">Hors Stock</SelectItem>
-                                    <SelectItem value="delaiAppro">En attente</SelectItem>
-                                    <SelectItem value="prepa">En préparation</SelectItem>
-                                    <SelectItem value="attenteEnvoi">En attente d`&apos;`envoi</SelectItem>
-                                    <SelectItem value="communiqueTransporteur">Communiqué au transporteur</SelectItem>
                                 </SelectContent>
                             </Select>
                             <p className="text-red-500">{fields.status.errors}</p>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <Label className=" text-l text-bold">Parfum</Label>
+                            <Input 
+                                type="text"
+                                key={fields.parfum.key}
+                                name={fields.parfum.name}
+                                defaultValue={data.parfum}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <p className="text-red-500">{fields.parfum.errors}</p>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <Label className=" text-l text-bold">Composition</Label>
+                            <Textarea
+                                key={fields.composition.key}
+                                name={fields.composition.name}
+                                defaultValue={data.composition}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <p className="text-red-500">{fields.composition.errors}</p>
                         </div>
 
                         <div className="flex flex-col gap-3">

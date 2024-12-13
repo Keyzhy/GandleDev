@@ -1,7 +1,21 @@
 import prisma from "@/app/lib/db";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table,TableHeader, TableRow,TableHead, TableBody, TableCell } from "@/components/ui/table";
+import { MoreHorizontal } from "lucide-react";
 import {unstable_noStore as noStore} from "next/cache";
+import Link from "next/link";
+
+const orderStatusMapping = {
+    nontraite: "Non Traité",
+    horsstock: "Hors Stock",
+    delaisapporvisionnement: "Délai Approvisionnement",
+    preparation: "Préparation",
+    attenteenvoi: "Attente Envoi",
+    communiquetransporteur: "Communiqué Transporteur",
+  };
+  
 
 async function getData(){
     const data = await prisma.order.findMany({
@@ -10,6 +24,7 @@ async function getData(){
             createdAt: true,
             status: true,
             id: true,
+            statuscomm: true,
             User: {
                 select:{
                     firstname: true,
@@ -42,7 +57,8 @@ export default async function OrdersPage(){
                             <TableRow>
                                 <TableHead>Client</TableHead>
                                 <TableHead>Type</TableHead>
-                                <TableHead>Status</TableHead>
+                                <TableHead>Status du paiement</TableHead>
+                                <TableHead>Statut de la commande</TableHead>
                                 <TableHead>Date</TableHead>
                                 <TableHead className="text-right">Montant</TableHead>
                             </TableRow>
@@ -56,8 +72,24 @@ export default async function OrdersPage(){
                                 </TableCell>
                                 <TableCell> Commande </TableCell>
                                 <TableCell>{item.status}</TableCell>
+                                <TableCell>{orderStatusMapping[item.statuscomm]}</TableCell>
                                 <TableCell>{new Intl.DateTimeFormat('en-GB').format(item.createdAt)}</TableCell>
                                 <TableCell className="text-right">{new Intl.NumberFormat('de-DE').format(item.amount / 100)} €</TableCell>
+                                <TableCell className="text-end">
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button size="icon" variant="ghost">
+                                                <MoreHorizontal />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                            <DropdownMenuSeparator/>
+                                            <DropdownMenuItem asChild><Link href={`/dashboard/orders/${item.id}`}>Modifier</Link></DropdownMenuItem>
+                                            <DropdownMenuItem asChild><Link href={`/dashboard/orders/${item.id}/delete`}>Supprimer</Link></DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </TableCell>
                             </TableRow>
                             ))}
                         </TableBody>

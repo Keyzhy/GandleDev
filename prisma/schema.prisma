@@ -30,6 +30,8 @@ model Product {
   name String
   description String
   status ProductStatus
+  parfum String @default("non renseigné")
+  composition String @default("non renseigné")
   price Int
   images String[]
   stock Int
@@ -52,6 +54,7 @@ model Order{
   id String @id @default(uuid())
   status String @default("pending")
   amount Int
+  statuscomm OrderStatus @default(nontraite)
 
   User User? @relation(fields: [userId],references: [id])
   userId String?
@@ -63,15 +66,19 @@ enum ProductStatus{
   brouillon
   publie
   archived
-  horsStock
-  delaiAppro
-  prepa
-  attenteEnvoi
-  communiqueTransporteur
 }
 
 enum Category{
   bougies
   fondants
   desodorisants
+}
+
+enum OrderStatus{
+  nontraite
+  horsstock
+  delaisapporvisionnement
+  preparation
+  attenteenvoi
+  communiquetransporteur
 }
