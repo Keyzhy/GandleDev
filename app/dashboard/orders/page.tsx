@@ -86,7 +86,6 @@ export default async function OrdersPage(){
                                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                             <DropdownMenuSeparator/>
                                             <DropdownMenuItem asChild><Link href={`/dashboard/orders/${item.id}`}>Modifier</Link></DropdownMenuItem>
-                                            <DropdownMenuItem asChild><Link href={`/dashboard/orders/${item.id}/delete`}>Supprimer</Link></DropdownMenuItem>
                                         </DropdownMenuContent>
                                     </DropdownMenu>
                                 </TableCell>

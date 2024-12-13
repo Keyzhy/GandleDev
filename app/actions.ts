@@ -2,7 +2,7 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import {parseWithZod} from '@conform-to/zod';
-import { bannerSchema, productSchema } from "./lib/zodSchemas";
+import { bannerSchema, orderSchema, productSchema } from "./lib/zodSchemas";
 import prisma from "./lib/db";
 import { redis } from "./lib/redis";
 import { Cart } from "./lib/interfaces";
@@ -103,6 +103,42 @@ export async function deleteProduct( formData: FormData){
 
     redirect('/dashboard/products');
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function editOrder ( previousState: any, formData: FormData){
+    const {getUser} = getKindeServerSession()
+    const user = await getUser()
+
+    if(!user || user.email!== 'yannisboulaid1@gmail.com' && user.email!== 'domecq.raphael@gmail.com'){
+        return redirect("/")
+    }
+
+    const submission = parseWithZod(formData, {
+        schema: orderSchema,
+    });
+
+    if(submission.status !== "success"){
+        return submission.reply();
+    }
+
+
+    const orderId = formData.get('orderId') as string
+    await prisma.order.update({
+        where: {
+            id: orderId,
+        },
+        data:{
+            statuscomm: submission.value.statuscomm,
+        }
+    });
+
+    redirect("/dashboard/orders");
+
+}
+
+
+
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function createBanner(previousState: any, formData: FormData) {
     const {getUser} = getKindeServerSession()

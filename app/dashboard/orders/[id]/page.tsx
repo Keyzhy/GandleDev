@@ -3,10 +3,10 @@ import prisma from "@/app/lib/db"
 import { notFound } from "next/navigation";
 import {unstable_noStore as noStore} from "next/cache";
 
-async function getData(productId: string) {
+async function getData(orderId: string) {
     const data = await prisma.order.findUnique({
         where: {
-            id: productId,
+            id: orderId,
         },
     });
 
