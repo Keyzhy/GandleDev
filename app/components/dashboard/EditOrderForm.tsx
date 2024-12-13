@@ -68,9 +68,9 @@ export function EditOrderForm({ data }: iAppProps){
                                 <SelectContent>
                                     <SelectItem value="nontraite">Non traité</SelectItem>
                                     <SelectItem value="horsstock">Hors stock</SelectItem>
-                                    <SelectItem value="delaisapporvisionnement">Delais d'approvisionnement</SelectItem>
+                                    <SelectItem value="delaisapporvisionnement">Delais d`&apos;`approvisionnement</SelectItem>
                                     <SelectItem value="preparation">Préparation</SelectItem>
-                                    <SelectItem value="attenteenvoi">Attente d'envoi</SelectItem>
+                                    <SelectItem value="attenteenvoi">Attente d`&apos;`envoi</SelectItem>
                                     <SelectItem value="communiquetransporteur">Communiqué au transporteur</SelectItem>
                                 </SelectContent>
                             </Select>
