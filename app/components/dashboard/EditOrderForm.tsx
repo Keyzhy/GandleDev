@@ -66,8 +66,8 @@ export function EditOrderForm({ orderdata }: iAppProps){
                 <CardContent>
                     <div className="flex flex-col gap-6">
                             
-                        <div className="flex flex-col gap-6">
-                            <Label>Status</Label>
+                        <div className="flex flex-col gap-3">
+                            <Label className="text-lg">Status</Label>
                             <Select key={fields.statuscomm.key}
                                 name={fields.statuscomm.name}
                                 defaultValue={orderdata.statuscomm}>
@@ -85,20 +85,12 @@ export function EditOrderForm({ orderdata }: iAppProps){
                             </Select>
                             <p className="text-red-500">{fields.statuscomm.errors}</p>
                         </div>
-                        <div className="flex flex-col gap-6">
-                            <Label className=" text-l text-bold">Nom complet</Label>
-                            <Input 
-                                disabled
-                                type="text"
-                                key={fields.shippingName.key}
-                                name={fields.shippingName.name}
-                                defaultValue={orderdata.shippingName}
-                                className="w-full"
-                                placeholder="Nom du produit"
-                            />
+                        <div className="flex flex-col gap-3">
+                            <Label className=" text-lg text-bold">Nom complet</Label>
+                            <Label className="text-m">{orderdata.shippingName}</Label>
                         </div>
-                        <div className="flex flex-col gap-6">
-                            <Label className=" text-l text-bold">Adresse complete :</Label>
+                        <Label className=" flex flex-col gap-2 text-lg text-extrabold">Adresse complete :</Label>
+                        <div className="flex flex-col gap-2">
                             <Label className="text-m">{orderdata.shippingAdressLine1},</Label>
                             {orderdata.shippingAdressLine2 && <Label className="text-m">{orderdata.shippingAdressLine1},</Label>}
                             <Label className="text-m">{orderdata.shippingPostalCode}, {orderdata.shippingCity}</Label>

@@ -74,7 +74,7 @@ export function EditForm({  productdata }: iAppProps){
                 <CardContent>
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-6">
-                            <Label className=" text-l text-bold">Nom</Label>
+                            <Label className=" text-lg text-bold">Nom</Label>
                             <Input 
                                 type="text"
                                 key={fields.name.key}

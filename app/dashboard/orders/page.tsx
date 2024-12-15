@@ -85,7 +85,7 @@ export default async function OrdersPage(){
                                         <DropdownMenuContent align="end">
                                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                             <DropdownMenuSeparator/>
-                                            <DropdownMenuItem asChild><Link href={`/dashboard/orders/${item.id}`}>Modifier</Link></DropdownMenuItem>
+                                            <DropdownMenuItem asChild><Link href={`/dashboard/orders/${item.id}`}>Voir</Link></DropdownMenuItem>
                                         </DropdownMenuContent>
                                     </DropdownMenu>
                                 </TableCell>
