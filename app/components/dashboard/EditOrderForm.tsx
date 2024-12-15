@@ -44,6 +44,14 @@ export function EditOrderForm({ orderdata }: iAppProps){
         shouldValidate: 'onBlur',
         shouldRevalidate: 'onInput',
     });
+    const fullAddress = [
+        orderdata.shippingAdressLine1,
+        orderdata.shippingAdressLine2,
+        orderdata.shippingCity,
+        orderdata.shippingPostalCode,
+      ]
+        .filter(Boolean)
+        .join(', ');
 
     return (
         <form id={form.id} onSubmit={form.onSubmit} action={action}>
@@ -98,7 +106,7 @@ export function EditOrderForm({ orderdata }: iAppProps){
                         </div>
                         <div className="flex flex-col gap-6">
                             <Label className=" text-l text-bold">Adresse complete :</Label>
-                            <Label className=" text-l text-bold">{orderdata.shippingAdressLine1}</Label>
+                            <Label className=" text-l text-bold">{fullAddress}</Label>
                         </div>
                     </div>
                 </CardContent>
