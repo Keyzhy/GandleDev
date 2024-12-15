@@ -311,6 +311,9 @@ export async function checkOut(){
                 {
                     shipping_rate: 'shr_1QW6d2DxDzTpTbnPk5W3P63D',
                 },
+                {
+                    shipping_rate: 'shr_1QW6u7DxDzTpTbnPPMTko7E6',
+                },
             ],
             success_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/success' : 'https://gandle-dev.vercel.app/payment/success',
             cancel_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/cancel' : 'https://gandle-dev.vercel.app/payment/cancel',
