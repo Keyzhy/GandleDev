@@ -25,11 +25,23 @@ export async function POST(req: Request){
         case "checkout.session.completed": {
             const session = event.data.object;
 
+            const shippingDetails = session.shipping_details;
+
+            const shippingAddress = shippingDetails?.address;
+            const shippingName = shippingDetails?.name;
+
             await prisma.order.create({
                 data:{
                     amount: session.amount_total as number ,
                     status: session.status as string,
                     userId: session.metadata?.userId,
+                    shippingName: shippingName || '',
+                    shippingAdressLine1: shippingAddress?.line1 || '',
+                    shippingAdressLine2: shippingAddress?.line2 || '',
+                    shippingCity: shippingAddress?.city || '',
+                    shippingPostalCode: shippingAddress?.postal_code || '',
+                    shippingCountry: shippingAddress?.country || '',
+
                 }
             });
 
