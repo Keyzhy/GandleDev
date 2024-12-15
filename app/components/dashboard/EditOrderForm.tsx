@@ -95,7 +95,10 @@ export function EditOrderForm({ orderdata }: iAppProps){
                                 className="w-full"
                                 placeholder="Nom du produit"
                             />
-                            <p className="text-red-500">{fields.shippingName.errors}</p>
+                        </div>
+                        <div className="flex flex-col gap-6">
+                            <Label className=" text-l text-bold">Adresse complete :</Label>
+                            <Label className=" text-l text-bold">{orderdata.shippingAdressLine1}</Label>
                         </div>
                     </div>
                 </CardContent>
