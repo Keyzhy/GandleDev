@@ -13,18 +13,26 @@ import { parseWithZod } from "@conform-to/zod";
 import { orderSchema } from "@/app/lib/zodSchemas";
 import { editOrder, } from "@/app/actions";
 import { type $Enums } from "@prisma/client";
+import { Input } from "@/components/ui/input";
 
 interface iAppProps {
-     data: {
+     orderdata: {
         id: string;
         status: string;
         amount: number;
         createdAt: Date;
         statuscomm: $Enums.OrderStatus;
+        shippingName: string;
+        shippingAdressLine1: string;
+        shippingAdressLine2: string;
+        shippingCity: string;
+        shippingPostalCode: string;
+        shippingCountry: string;
+
     };
 }
 
-export function EditOrderForm({ data }: iAppProps){
+export function EditOrderForm({ orderdata }: iAppProps){
     const [lastResult, action] = useActionState(editOrder, undefined);
     const [form, fields] = useForm({
         lastResult,
@@ -39,7 +47,7 @@ export function EditOrderForm({ data }: iAppProps){
 
     return (
         <form id={form.id} onSubmit={form.onSubmit} action={action}>
-            <input type="hidden" name="orderId" value={data.id} />
+            <input type="hidden" name="orderId" value={orderdata.id} />
             <div className="flex intems-center gap-4">
                 <Button variant="outline" size="icon" asChild>
                     <Link href="/dashboard/orders">
@@ -61,7 +69,7 @@ export function EditOrderForm({ data }: iAppProps){
                             <Label>Status</Label>
                             <Select key={fields.statuscomm.key}
                                 name={fields.statuscomm.name}
-                                defaultValue={data.statuscomm}>
+                                defaultValue={orderdata.statuscomm}>
                                 <SelectTrigger>
                                     <SelectValue placeholder="Sélectionner un status"/>
                                 </SelectTrigger>
@@ -76,7 +84,19 @@ export function EditOrderForm({ data }: iAppProps){
                             </Select>
                             <p className="text-red-500">{fields.statuscomm.errors}</p>
                         </div>
-                        
+                        <div className="flex flex-col gap-6">
+                            <Label className=" text-l text-bold">Nom complet</Label>
+                            <Input 
+                                disabled
+                                type="text"
+                                key={fields.shippingName.key}
+                                name={fields.shippingName.name}
+                                defaultValue={orderdata.shippingName}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <p className="text-red-500">{fields.shippingName.errors}</p>
+                        </div>
                     </div>
                 </CardContent>
                 <CardFooter>

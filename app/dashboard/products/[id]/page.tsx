@@ -1,10 +1,10 @@
-import { EditOrderForm } from "@/app/components/dashboard/EditOrderForm";
+import { EditForm } from "@/app/components/dashboard/EditForm";
 import prisma from "@/app/lib/db"
 import { notFound } from "next/navigation";
 import {unstable_noStore as noStore} from "next/cache";
 
 async function getData(productId: string) {
-    const data = await prisma.order.findUnique({
+    const data = await prisma.product.findUnique({
         where: {
             id: productId,
         },
@@ -31,6 +31,6 @@ export default async function EditRoute({
     const data = await getData(id);
 
     return (
-        <EditOrderForm data={data}/>
+        <EditForm productdata={data}/>
     )
 } 

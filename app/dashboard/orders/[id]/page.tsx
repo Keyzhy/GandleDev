@@ -31,6 +31,6 @@ export default async function EditRoute({
     const data = await getData(id);
 
     return (
-        <EditOrderForm data={data}/>
+        <EditOrderForm orderdata={data}/>
     )
 } 

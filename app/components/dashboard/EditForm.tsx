@@ -21,7 +21,7 @@ import Image from "next/image";
 import { type $Enums } from "@prisma/client";
 
 interface iAppProps {
-     data: {
+     productdata: {
         name: string;
         description: string;
         status: $Enums.ProductStatus;
@@ -36,8 +36,8 @@ interface iAppProps {
     };
 }
 
-export function EditForm({ data }: iAppProps){
-    const[images, setImages] = useState<string[]>(data.images);
+export function EditForm({  productdata }: iAppProps){
+    const[images, setImages] = useState<string[]>(productdata.images);
     const [lastResult, action] = useActionState(editProduct, undefined);
     const [form, fields] = useForm({
         lastResult,
@@ -56,7 +56,7 @@ export function EditForm({ data }: iAppProps){
 
     return (
         <form id={form.id} onSubmit={form.onSubmit} action={action}>
-            <input type="hidden" name="productId" value={data.id} />
+            <input type="hidden" name="productId" value={productdata.id} />
             <div className="flex intems-center gap-4">
                 <Button variant="outline" size="icon" asChild>
                     <Link href="/dashboard/products">
@@ -79,7 +79,7 @@ export function EditForm({ data }: iAppProps){
                                 type="text"
                                 key={fields.name.key}
                                 name={fields.name.name}
-                                defaultValue={data.name}
+                                defaultValue={productdata.name}
                                 className="w-full"
                                 placeholder="Nom du produit"
                             />
@@ -89,7 +89,7 @@ export function EditForm({ data }: iAppProps){
                             <Label>Description</Label>
                             <Textarea key={fields.description.key}
                                 name={fields.description.name}
-                                defaultValue={data.description}
+                                defaultValue={productdata.description}
                                 placeholder="Ajouter une description ici..."
                                 />
                                 <p className="text-red-500">{fields.description.errors}</p>
@@ -99,7 +99,7 @@ export function EditForm({ data }: iAppProps){
                             <Input key={fields.price.key}
                                 type="number"
                                 name={fields.price.name}
-                                defaultValue={data.price} 
+                                defaultValue={productdata.price} 
                                 placeholder="Entrer le plix ici..."
                                 />
                                 <p className="text-red-500">{fields.price.errors}</p>
@@ -109,7 +109,7 @@ export function EditForm({ data }: iAppProps){
                             <Input key={fields.stock.key}
                                 type="number"
                                 name={fields.stock.name}
-                                defaultValue={data.stock} 
+                                defaultValue={productdata.stock} 
                                 placeholder="Entrer le stock ici..."
                                 />
                                 <p className="text-red-500">{fields.stock.errors}</p>
@@ -118,7 +118,7 @@ export function EditForm({ data }: iAppProps){
                             <Label>Nouveautée</Label>
                             <Switch key={fields.isFeatured.key}
                                 name={fields.isFeatured.name}
-                                defaultChecked={data.isFeatured}
+                                defaultChecked={productdata.isFeatured}
                                 />
                                 <p className="text-red-500">{fields.isFeatured.errors}</p>
                         </div>
@@ -126,7 +126,7 @@ export function EditForm({ data }: iAppProps){
                             <Label>Status</Label>
                             <Select key={fields.status.key}
                                 name={fields.status.name}
-                                defaultValue={data.status}>
+                                defaultValue={productdata.status}>
                                 <SelectTrigger>
                                     <SelectValue placeholder="Sélectionner un status"/>
                                 </SelectTrigger>
@@ -143,7 +143,7 @@ export function EditForm({ data }: iAppProps){
                                 type="text"
                                 key={fields.parfum.key}
                                 name={fields.parfum.name}
-                                defaultValue={data.parfum}
+                                defaultValue={productdata.parfum}
                                 className="w-full"
                                 placeholder="Nom du produit"
                             />
@@ -154,7 +154,7 @@ export function EditForm({ data }: iAppProps){
                             <Textarea
                                 key={fields.composition.key}
                                 name={fields.composition.name}
-                                defaultValue={data.composition}
+                                defaultValue={productdata.composition}
                                 className="w-full"
                                 placeholder="Nom du produit"
                             />
@@ -166,7 +166,7 @@ export function EditForm({ data }: iAppProps){
                             <Select 
                                 key={fields.category.key}
                                 name={fields.category.name}
-                                defaultValue={data.category}
+                                defaultValue={productdata.category}
                             >
                                 <SelectTrigger>
                                     <SelectValue placeholder="Sélectionner une catégorie"/>
