@@ -304,6 +304,14 @@ export async function checkOut(){
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
             line_items: lineItems,
+            shipping_address_collection: {
+                allowed_countries: ['FR'],
+            },
+            shipping_options: [
+                {
+                    shipping_rate: 'shr_1QW6d2DxDzTpTbnPk5W3P63D',
+                },
+            ],
             success_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/success' : 'https://gandle-dev.vercel.app/payment/success',
             cancel_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/cancel' : 'https://gandle-dev.vercel.app/payment/cancel',
             metadata:{
