@@ -309,11 +309,16 @@ export async function checkOut(){
             },
             shipping_options: [
                 {
-                    shipping_rate: 'shr_1QW6d2DxDzTpTbnPk5W3P63D',
+                    shipping_rate: 'shr_1QWgvpDxDzTpTbnPJWS0gfQ9',
                 },
                 {
-                    shipping_rate: 'shr_1QW6u7DxDzTpTbnPPMTko7E6',
+                    shipping_rate: 'shr_1QWgv0DxDzTpTbnPZo0O8S2t',
                 },
+                {
+                    shipping_rate: 'shr_1QWgtyDxDzTpTbnPYW3uYzja',
+                },
+
+                
             ],
             success_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/success' : 'https://gandle-dev.vercel.app/payment/success',
             cancel_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/cancel' : 'https://gandle-dev.vercel.app/payment/cancel',

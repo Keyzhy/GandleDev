@@ -3,6 +3,7 @@ import { redis } from "@/app/lib/redis";
 import { stripe } from "@/app/lib/stripe";
 import { headers } from "next/headers";
 
+
 export async function POST(req: Request){
     const body = await req.text();
 
@@ -29,7 +30,7 @@ export async function POST(req: Request){
 
             const shippingAddress = shippingDetails?.address;
             const shippingName = shippingDetails?.name;
-
+ 
             await prisma.order.create({
                 data:{
                     amount: session.amount_total as number ,
@@ -41,7 +42,6 @@ export async function POST(req: Request){
                     shippingCity: shippingAddress?.city || '',
                     shippingPostalCode: shippingAddress?.postal_code || '',
                     shippingCountry: shippingAddress?.country || '',
-
                 }
             });
 
