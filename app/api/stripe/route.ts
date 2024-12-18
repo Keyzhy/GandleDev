@@ -2,8 +2,11 @@ import prisma from "@/app/lib/db";
 import { redis } from "@/app/lib/redis";
 import { stripe } from "@/app/lib/stripe";
 import { headers } from "next/headers";
+import Stripe from "stripe";
 
-
+type ExtendedSession = Stripe.Checkout.Session & {
+    shipping_rate?: string; // Propriété personnalisée
+  };
 export async function POST(req: Request){
     const body = await req.text();
 
@@ -25,15 +28,26 @@ export async function POST(req: Request){
     switch(event.type){
         case "checkout.session.completed": {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const session = event.data.object as any;
+            const session = event.data.object as ExtendedSession;
 
             const shippingDetails = session.shipping_details;
-            const shippingRateDetails = session.shipping_rate;
+            
 
             const shippingAddress = shippingDetails?.address;
             const shippingName = shippingDetails?.name;
-            const shippingRateName = shippingRateDetails?.id;
+            
+            const shippingRate = session.shipping_rate;
 
+            if (shippingRate) {
+              console.log("Shipping Rate ID:", shippingRate);
+      
+              // Vous pouvez également récupérer les détails avec l'API Stripe si nécessaire
+              const shippingRateDetails = await stripe.shippingRates.retrieve(
+                shippingRate
+              );
+      
+              console.log("Shipping Rate Details:", shippingRateDetails);
+            }
             // Optionnel : récupérer les détails du shipping_rate via l'API Stripe
             
             
@@ -49,7 +63,7 @@ export async function POST(req: Request){
                     shippingCity: shippingAddress?.city || '',
                     shippingPostalCode: shippingAddress?.postal_code || '',
                     shippingCountry: shippingAddress?.country || '',
-                    shippingOption: shippingRateName || 'Pas ca ',
+                    shippingOption: shippingRate || '',
                 }
             });
 
