@@ -32,7 +32,7 @@ export async function POST(req: Request){
 
             const shippingAddress = shippingDetails?.address;
             const shippingName = shippingDetails?.name;
-            const shippingRateName = shippingRateDetails?.display_name;
+            const shippingRateName = shippingRateDetails?.id;
 
             // Optionnel : récupérer les détails du shipping_rate via l'API Stripe
             
@@ -49,7 +49,7 @@ export async function POST(req: Request){
                     shippingCity: shippingAddress?.city || '',
                     shippingPostalCode: shippingAddress?.postal_code || '',
                     shippingCountry: shippingAddress?.country || '',
-                    shippingOption: shippingRateName || '',
+                    shippingOption: shippingRateName || 'Pas ca ',
                 }
             });
 
