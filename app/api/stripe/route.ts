@@ -24,7 +24,7 @@ export async function POST(req: Request){
 
     switch(event.type){
         case "checkout.session.completed": {
-            // eslint-disable-next-line no-explicit-any
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const session = event.data.object as any;
 
             const shippingDetails = session.shipping_details;
