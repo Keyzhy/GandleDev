@@ -28,11 +28,11 @@ export async function POST(req: Request){
             const session = event.data.object as any;
 
             const shippingDetails = session.shipping_details;
+            const shippingRateDetails = session.shipping_rate;
 
             const shippingAddress = shippingDetails?.address;
             const shippingName = shippingDetails?.name;
-            const shippingRateName = session.shipping_rate;
-
+            const shippingRateName = shippingRateDetails?.display_name;
 
             // Optionnel : récupérer les détails du shipping_rate via l'API Stripe
             
@@ -49,7 +49,7 @@ export async function POST(req: Request){
                     shippingCity: shippingAddress?.city || '',
                     shippingPostalCode: shippingAddress?.postal_code || '',
                     shippingCountry: shippingAddress?.country || '',
-                    shippingOption: shippingRateName?.display_name || '',
+                    shippingOption: shippingRateName || '',
                 }
             });
 
