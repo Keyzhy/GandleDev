@@ -24,12 +24,22 @@ export async function POST(req: Request){
 
     switch(event.type){
         case "checkout.session.completed": {
-            const session = event.data.object;
+            const session = event.data.object as any;
 
             const shippingDetails = session.shipping_details;
 
             const shippingAddress = shippingDetails?.address;
             const shippingName = shippingDetails?.name;
+            const shippingRateId = session.shipping_rate;
+
+            // Optionnel : récupérer les détails du shipping_rate via l'API Stripe
+            let shippingRateDetails = null;
+            if (shippingRateId) {
+                shippingRateDetails = await stripe.shippingRates.retrieve(
+                    shippingRateId
+                );
+            }
+            
  
             await prisma.order.create({
                 data:{
@@ -42,6 +52,7 @@ export async function POST(req: Request){
                     shippingCity: shippingAddress?.city || '',
                     shippingPostalCode: shippingAddress?.postal_code || '',
                     shippingCountry: shippingAddress?.country || '',
+                    shippingOption: shippingRateId || '',
                 }
             });
 
