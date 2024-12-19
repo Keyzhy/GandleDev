@@ -338,15 +338,8 @@ export async function checkOut(){
                     },
                   },
                 {
-                    shipping_rate: 'shr_1QWgvpDxDzTpTbnPJWS0gfQ9',
+                    shipping_rate: 'shr_1QXmvdDxDzTpTbnPY4BghtL7',
                 },
-                {
-                    shipping_rate: 'shr_1QWgv0DxDzTpTbnPZo0O8S2t',
-                },
-                {
-                    shipping_rate: 'shr_1QWgtyDxDzTpTbnPYW3uYzja',
-                },
-
                 
             ],
             success_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/success' : 'https://gandle-dev.vercel.app/payment/success',
