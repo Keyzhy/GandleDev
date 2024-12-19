@@ -28,11 +28,11 @@ export async function POST(req: Request){
             const session = event.data.object as any;
 
             const shippingDetails = session.shipping_details;
-            const shippingRateDetails = session.shipping_cost;
+            const shippingRateDetails = session.shipping_options;
 
             const shippingAddress = shippingDetails?.address;
             const shippingName = shippingDetails?.name;
-            const shippingRateName = shippingRateDetails?.shipping_rate;
+            const shippingRateName = shippingRateDetails?.display_name;
 
             // Optionnel : récupérer les détails du shipping_rate via l'API Stripe
             
