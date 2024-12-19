@@ -32,7 +32,7 @@ export async function POST(req: Request){
 
             const shippingAddress = shippingDetails?.address;
             const shippingName = shippingDetails?.name;
-            const shippingRateName = shippingRateDetails?.shipping_rate.name;
+            const shippingRateName = shippingRateDetails?.shipping_rate;
 
             // Optionnel : récupérer les détails du shipping_rate via l'API Stripe
             
