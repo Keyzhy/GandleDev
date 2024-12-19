@@ -26,7 +26,7 @@ interface iAppProps {
         description: string;
         status: $Enums.ProductStatus;
         parfum: string;
-        poids: string;
+        poids: number;
         composition: string;
         price: number;
         images: string[];
