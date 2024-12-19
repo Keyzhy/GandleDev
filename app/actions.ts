@@ -285,6 +285,14 @@ export async function checkOut(){
     // eslint-disable-next-line prefer-const
     let cart: Cart | null = await redis.get(`cart-${user.id}`);
 
+    let totalPrice = 0;
+
+    cart?.items.forEach((item) => {
+        totalPrice += item.price * item.quantity;
+    })
+    
+
+
     if(cart && cart.items){
 
         const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = cart.items.map((item)=>(
@@ -300,6 +308,7 @@ export async function checkOut(){
                 quantity: item.quantity
             }
         ))
+        
 
         const session = await stripe.checkout.sessions.create({
             mode: 'payment',
@@ -308,6 +317,26 @@ export async function checkOut(){
                 allowed_countries: ['FR'],
             },
             shipping_options: [
+                {
+                    shipping_rate_data: {
+                      type: 'fixed_amount',
+                      fixed_amount: {
+                        amount: 0,
+                        currency: 'eur',
+                      },
+                      display_name: 'Livraison gratuite',
+                      delivery_estimate: {
+                        minimum: {
+                          unit: 'business_day',
+                          value: 5,
+                        },
+                        maximum: {
+                          unit: 'business_day',
+                          value: 7,
+                        },
+                      },
+                    },
+                  },
                 {
                     shipping_rate: 'shr_1QWgvpDxDzTpTbnPJWS0gfQ9',
                 },
