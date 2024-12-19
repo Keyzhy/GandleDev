@@ -308,6 +308,22 @@ export async function checkOut(){
                 quantity: item.quantity
             }
         ))
+
+        let shippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] = [];
+
+        if(totalPrice > 8000){
+            shippingOptions = [
+                {
+                    shipping_rate: 'shr_1QXo9zDxDzTpTbnPWI4RsKJj', // Option pour commandes <= 50 EUR
+                },
+            ];
+        } else {
+                shippingOptions = [
+                    {
+                        shipping_rate: 'shr_1QXo9aDxDzTpTbnPtyd16sMC', // Option pour commandes <= 50 EUR
+                    },
+                ];
+            }
         
 
         const session = await stripe.checkout.sessions.create({
@@ -316,32 +332,7 @@ export async function checkOut(){
             shipping_address_collection: {
                 allowed_countries: ['FR'],
             },
-            shipping_options: [
-                {
-                    shipping_rate_data: {
-                      type: 'fixed_amount',
-                      fixed_amount: {
-                        amount: 0,
-                        currency: 'eur',
-                      },
-                      display_name: 'Livraison gratuite',
-                      delivery_estimate: {
-                        minimum: {
-                          unit: 'business_day',
-                          value: 5,
-                        },
-                        maximum: {
-                          unit: 'business_day',
-                          value: 7,
-                        },
-                      },
-                    },
-                  },
-                {
-                    shipping_rate: 'shr_1QXmvdDxDzTpTbnPY4BghtL7',
-                },
-                
-            ],
+            shipping_options: shippingOptions,
             success_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/success' : 'https://gandle-dev.vercel.app/payment/success',
             cancel_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/cancel' : 'https://gandle-dev.vercel.app/payment/cancel',
             metadata:{
