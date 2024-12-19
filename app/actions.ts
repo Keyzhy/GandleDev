@@ -311,7 +311,7 @@ export async function checkOut(){
 
         let shippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] = [];
 
-        if(totalPrice > 8000){
+        if(totalPrice > 80){
             shippingOptions = [
                 {
                     shipping_rate: 'shr_1QXo9zDxDzTpTbnPWI4RsKJj', // Option pour commandes <= 50 EUR
