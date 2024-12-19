@@ -4,6 +4,7 @@ export type Cart ={
         id: string;
         name: string;
         price: number;
+        poids: number;
         quantity: number;
         imageString: string;
     }>;

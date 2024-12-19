@@ -34,6 +34,7 @@ export async function createProduct(previousState: unknown, formData: FormData) 
             description: submission.value.description,
             status: submission.value.status,
             parfum: submission.value.parfum,
+            poids: submission.value.poids,
             composition: submission.value.composition,
             price: submission.value.price,
             images: flattenUrls,
@@ -73,6 +74,7 @@ export async function editProduct( previousState: any, formData: FormData){
             name: submission.value.name,
             description: submission.value.description,
             parfum: submission.value.parfum,
+            poids: submission.value.poids,
             composition: submission.value.composition,
             category: submission.value.category,
             price: submission.value.price,
@@ -199,6 +201,7 @@ export async function addItem(productId: string){
             name: true,
             price:true,
             images: true,
+            poids: true,
         },
         where: {
             id: productId,
@@ -217,6 +220,7 @@ export async function addItem(productId: string){
             items:[
                 {
                     price: selectedProduct.price,
+                    poids: selectedProduct.poids,
                     id: selectedProduct.id,
                     imageString: selectedProduct.images[0],
                     name: selectedProduct.name,
@@ -238,6 +242,7 @@ export async function addItem(productId: string){
         if(!itemFound) {
             myCart.items.push({
                 id: selectedProduct.id,
+                poids: selectedProduct.poids,
                 imageString: selectedProduct.images[0],
                 name: selectedProduct.name,
                 price: selectedProduct.price,
@@ -290,6 +295,11 @@ export async function checkOut(){
     cart?.items.forEach((item) => {
         totalPrice += item.price * item.quantity;
     })
+    let totalWeight = 0;
+
+    cart?.items.forEach((item) => {
+        totalWeight += item.poids * item.quantity;
+    })
     
 
 
@@ -314,16 +324,55 @@ export async function checkOut(){
         if(totalPrice > 80){
             shippingOptions = [
                 {
-                    shipping_rate: 'shr_1QXo9zDxDzTpTbnPWI4RsKJj', // Option pour commandes <= 50 EUR
+                    shipping_rate: 'shr_1QXo9zDxDzTpTbnPWI4RsKJj', 
                 },
             ];
-        } else {
+        } else if (totalWeight > 0 && totalWeight <= 250){
                 shippingOptions = [
                     {
-                        shipping_rate: 'shr_1QXo9aDxDzTpTbnPtyd16sMC', // Option pour commandes <= 50 EUR
+                        shipping_rate: 'shr_1QXmvdDxDzTpTbnPY4BghtL7', 
+                    },
+                    {
+                        shipping_rate: 'shr_1QXoAdDxDzTpTbnPmtXoOWft', 
                     },
                 ];
-            }
+        } else if(totalWeight >250  && totalWeight <= 500){
+                shippingOptions = [
+                    {
+                        shipping_rate: 'shr_1QXo8YDxDzTpTbnPyyosAb4D', 
+                    },
+                    {
+                        shipping_rate: 'shr_1QXoAdDxDzTpTbnPmtXoOWft', 
+                    },
+                ];
+        } else if(totalWeight > 500 && totalWeight <= 1000){
+                shippingOptions = [
+                    {
+                        shipping_rate: 'shr_1QXo9ADxDzTpTbnPOS7MyPT4', 
+                    },
+                    {
+                        shipping_rate: 'shr_1QXoAdDxDzTpTbnPmtXoOWft', 
+                    },
+                ];
+        } else if(totalWeight > 1000 && totalWeight <= 2000){
+                shippingOptions = [
+                    {
+                        shipping_rate: 'shr_1QXo9aDxDzTpTbnPtyd16sMC', 
+                    },
+                    {
+                        shipping_rate: 'shr_1QXoBEDxDzTpTbnPQb8Pc7H2', 
+                    },
+                ];
+        }else if(totalWeight > 2000){
+                shippingOptions = [
+                    {
+                        shipping_rate: 'shr_1QXo9aDxDzTpTbnPtyd16sMC', 
+                    },
+                    {
+                        shipping_rate: 'shr_1QXoBEDxDzTpTbnPQb8Pc7H2', 
+                    },
+                ];
+        }
         
 
         const session = await stripe.checkout.sessions.create({

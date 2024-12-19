@@ -26,6 +26,7 @@ interface iAppProps {
         description: string;
         status: $Enums.ProductStatus;
         parfum: string;
+        poids: string;
         composition: string;
         price: number;
         images: string[];
@@ -148,6 +149,19 @@ export function EditForm({  productdata }: iAppProps){
                                 placeholder="Nom du produit"
                             />
                             <p className="text-red-500">{fields.parfum.errors}</p>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <Label className=" text-l text-bold">Poids </Label>
+                            <Input 
+                                type="text"
+                                key={fields.poids.key}
+                                name={fields.poids.name}
+                                defaultValue={productdata.poids}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <Label className="text-m">grammes</Label>
+                            <p className="text-red-500">{fields.poids.errors}</p>
                         </div>
                         <div className="flex flex-col gap-3">
                             <Label className=" text-l text-bold">Composition</Label>

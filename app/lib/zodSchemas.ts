@@ -5,6 +5,7 @@ export const productSchema = z.object({
   description: z.string(),
   status: z.enum(["brouillon", "publie","archived"]),
   parfum: z.string(),
+  poids: z.number().min(0),
   composition: z.string(),
   price: z.number().min(1),
   images: z.array(z.string()).min(1, "Publier au moins une image"),
