@@ -63,12 +63,14 @@ model Order{
   shippingPostalCode String @default("non renseigné")
   shippingCountry String  @default("non renseigné")
   shippingOption String @default("non renseigné")
+  OrderInfo String[] @default([])
 
   User User? @relation(fields: [userId],references: [id])
   userId String?
 
   createdAt DateTime @default(now())
 }
+
 
 enum ProductStatus{
   brouillon

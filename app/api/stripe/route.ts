@@ -22,10 +22,13 @@ export async function POST(req: Request){
         return new Response("Webhook Error",{status: 400});
     }
 
+
+
     switch(event.type){
         case "checkout.session.completed": {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const session = event.data.object as any;
+
 
             const shippingDetails = session.shipping_details;
             const shippingRateDetails = session.shipping_cost;
@@ -33,6 +36,7 @@ export async function POST(req: Request){
             const shippingAddress = shippingDetails?.address;
             const shippingName = shippingDetails?.name;
             const shippingRateName = shippingRateDetails?.shipping_rate;
+
 
             // Optionnel : récupérer les détails du shipping_rate via l'API Stripe
             
@@ -50,6 +54,7 @@ export async function POST(req: Request){
                     shippingPostalCode: shippingAddress?.postal_code || '',
                     shippingCountry: shippingAddress?.country || '',
                     shippingOption: shippingRateName || '',
+                    OrderInfo: session.metadata?.OrderInfo,
                 }
             });
 

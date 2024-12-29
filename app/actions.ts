@@ -319,6 +319,13 @@ export async function checkOut(){
             }
         ))
 
+        const orderInfo: { name: string; quantity: number }[] = cart.items.map((item)=>(
+            {
+                name: item.name,
+                quantity: item.quantity,
+            }));
+
+
         let shippingOptions: Stripe.Checkout.SessionCreateParams.ShippingOption[] = [];
 
         if(totalPrice > 80){
@@ -386,6 +393,7 @@ export async function checkOut(){
             cancel_url: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/payment/cancel' : 'https://gandle-dev.vercel.app/payment/cancel',
             metadata:{
                 userId: user.id,
+                orderInfo: JSON.stringify(orderInfo),
             }
         });
 
