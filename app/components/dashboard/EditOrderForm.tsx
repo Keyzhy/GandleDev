@@ -13,7 +13,17 @@ import { parseWithZod } from "@conform-to/zod";
 import { orderSchema } from "@/app/lib/zodSchemas";
 import { editOrder, } from "@/app/actions";
 import { type $Enums } from "@prisma/client";
-import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+
+const shippingOptionMapping: { [key: string]: string } = {
+    shr_1QXo9zDxDzTpTbnPWI4RsKJj: "Livraison gratuite",
+    shr_1QXmvdDxDzTpTbnPY4BghtL7: "Livraison colissimo -250g",
+    shr_1QXo8YDxDzTpTbnPyyosAb4D: "Livraison colissimo 250g-500g",
+    shr_1QXo9ADxDzTpTbnPOS7MyPT4: "Livraison colissimo 500g-1kg",
+    shr_1QXo9aDxDzTpTbnPtyd16sMC: "Livraison colissimo 1kg-2kg ou +2kg",
+    shr_1QXoAdDxDzTpTbnPmtXoOWft: "Livraison chronopost 250g-1kg",
+    shr_1QXoBEDxDzTpTbnPQb8Pc7H2: "Livraison chronopost +1kg",
+}
 
 interface iAppProps {
      orderdata: {
@@ -28,6 +38,7 @@ interface iAppProps {
         shippingCity: string;
         shippingPostalCode: string;
         shippingCountry: string;
+        shippingOption: string;
 
     };
 }
@@ -64,7 +75,7 @@ export function EditOrderForm({ orderdata }: iAppProps){
                     <CardDescription>Ce formulaire permet de modifier une commande</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-4">
                             
                         <div className="flex flex-col gap-3">
                             <Label className="text-lg">Status</Label>
@@ -85,15 +96,25 @@ export function EditOrderForm({ orderdata }: iAppProps){
                             </Select>
                             <p className="text-red-500">{fields.statuscomm.errors}</p>
                         </div>
+                        <Separator className=""/>
                         <div className="flex flex-col gap-3">
-                            <Label className=" text-lg text-bold">Nom complet</Label>
+                            <Label className="text-lg text-bold">Nom complet</Label>
                             <Label className="text-m">{orderdata.shippingName}</Label>
                         </div>
-                        <Label className=" flex flex-col gap-2 text-lg text-extrabold">Adresse complete :</Label>
+                        <Separator className=""/>
+                        <Label className=" flex flex-col gap-3 text-lg text-extrabold -mb-2">Adresse complete :</Label>
+
                         <div className="flex flex-col gap-2">
                             <Label className="text-m">{orderdata.shippingAdressLine1},</Label>
                             {orderdata.shippingAdressLine2 && <Label className="text-m">{orderdata.shippingAdressLine1},</Label>}
-                            <Label className="text-m">{orderdata.shippingPostalCode}, {orderdata.shippingCity}</Label>
+                            <Label className="text-m">{orderdata.shippingPostalCode},{orderdata.shippingCity}</Label>
+                        </div>
+
+                        <Separator className=""/>
+                        <Label className=" flex flex-col gap-3 text-lg text-extrabold -mb-2">Option de livraison choisie :</Label>
+
+                        <div className="flex flex-col gap-2">
+                            <Label className="text-m">{shippingOptionMapping[orderdata.shippingOption]}</Label>
                         </div>
                     </div>
                 </CardContent>
