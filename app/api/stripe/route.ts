@@ -37,6 +37,8 @@ export async function POST(req: Request){
             const shippingName = shippingDetails?.name;
             const shippingRateName = shippingRateDetails?.shipping_rate;
 
+            const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+
 
             // Optionnel : récupérer les détails du shipping_rate via l'API Stripe
             
@@ -54,7 +56,12 @@ export async function POST(req: Request){
                     shippingPostalCode: shippingAddress?.postal_code || '',
                     shippingCountry: shippingAddress?.country || '',
                     shippingOption: shippingRateName || '',
-                    OrderInfo: session.metadata?.orderInfo,
+                    LineItems: lineItems.data.map(item => ({
+                        id: item.id,
+                        description: item.description,
+                        quantity: item.quantity,
+                        price: item.price?.unit_amount ?? 0,
+                    })),
                 }
             });
 
