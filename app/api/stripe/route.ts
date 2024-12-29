@@ -54,7 +54,7 @@ export async function POST(req: Request){
                     shippingPostalCode: shippingAddress?.postal_code || '',
                     shippingCountry: shippingAddress?.country || '',
                     shippingOption: shippingRateName || '',
-                    OrderInfo: session.metadata?.OrderInfo,
+                    OrderInfo: session.metadata?.orderInfo,
                 }
             });
 
