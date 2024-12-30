@@ -26,7 +26,7 @@ async function getData(orderId: string) {
     if(!data) {
         return notFound();
     }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
     const transformedLineItems = data.LineItems.map((item: any)=> ({
         description: item.description ||"",
         quantity: item.quantity || 0,
