@@ -19,28 +19,30 @@ interface iAppProps{
 export function ProductCard({item}: iAppProps){
     
     return(
-        <div className="rounded-lg">
+        <div className="rounded-lg w-80 h-[480px] sm:w-80 sm:h-[480px] mt-3 relative">
+            
             <Carousel className="w-full mx-auto">
                 <CarouselContent>
                     {item.images.map((item, index) =>(
                         <CarouselItem key={index}>
-                            <div className="relative h-[330px]">
+                            <div className="relative h-[380px]">
                                 <Image src={item} alt="Product Image" fill className="object-cover object-center w-full h-full rounded-lg"/>
 
                             </div>
                         </CarouselItem>
                     ))}
                 </CarouselContent>
+                
                 <CarouselPrevious className="ml-16"/>
                 <CarouselNext className="mr-16"/>
             </Carousel>
 
-            <div className="flex justify-between items-center mt-2">
+            <div className="flex justify-between items-center mt-3">
                 <h1 className="font-semibold text-xl">{item.name}</h1>
                 <h3 className="inline-flex  items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-primary/10">{item.price} €</h3>
             </div>
             <Link href={`/product/${item.id}`}>
-            <Button className="w-full mt-5">
+            <Button className="w-full mt-30">
                 En savoir plus
             </Button>
             </Link>
@@ -51,7 +53,7 @@ export function ProductCard({item}: iAppProps){
 export function LoadingProductCard(){
     return(
         <div className="flex flex-col">
-            <Skeleton className="w-full h-[330px]"/>
+            <Skeleton className="w-full h-[380px]"/>
             <div className="flex flex-col mt-2 gap-y-2">
                 <Skeleton className="h-4 w-full"/>
                 <Skeleton className="h-6 w-full"/>

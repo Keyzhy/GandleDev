@@ -18,10 +18,10 @@ export async function Navbar() {
     const total = cart?.items.reduce((sum, item)=> sum + item.quantity, 0) || 0;
 
     return (
-        <nav className="w-full z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between bg-white">
-            <div className="flex items-center ml-10">
+        <nav className="relative rounded-2xl w-full z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between bg-white">
+            <div className="flex items-center ml-12">
                 <Link href="/">
-                    <Image src="/logo.png" alt="logo" width={75} height={75}/>
+                    <Image src="/logo.png" alt="logo" width={80} height={80}/>
                 </Link>
                 <NavbarLinks/>
 
