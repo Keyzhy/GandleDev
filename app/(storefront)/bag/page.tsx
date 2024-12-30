@@ -35,7 +35,7 @@ export default async function BagRoute() {
                     <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
                         <ShoppingBag className="w-10 h-10 text-primary"/>
                     </div>
-                    <h2 className="mt-6 text-xl font-semibold">Il n`&apos;`y a pas de produits dans le panier</h2>
+                    <h2 className="mt-6 text-xl font-semibold">Il n&apos;y a pas de produits dans le panier</h2>
                 </div>
             ):(
                 < div className="flex flex-col gap-y-10">

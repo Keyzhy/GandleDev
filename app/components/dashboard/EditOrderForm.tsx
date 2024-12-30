@@ -39,7 +39,7 @@ interface iAppProps {
         shippingPostalCode: string;
         shippingCountry: string;
         shippingOption: string;
-
+        LineItems: {description: string; quantity: number; price: number}[];
     };
 }
 
@@ -116,6 +116,22 @@ export function EditOrderForm({ orderdata }: iAppProps){
                         <div className="flex flex-col gap-2">
                             <Label className="text-m">{shippingOptionMapping[orderdata.shippingOption]}</Label>
                         </div>
+                        <Separator/>
+
+                        <Label className=" flex flex-col gap-3 text-lg text-extrabold -mb-2">Articles</Label>
+                        <div className="flex flex-col gap-3">
+                            {orderdata.LineItems.map((item,index)=>(
+                                <div key={index} className="flex justify-between items-center">
+                                    <div>
+                                        <p className="font-semibold"> {item.description}</p>
+                                        <p className="font-semibold"> {item.quantity}</p>
+                                        
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+
                     </div>
                 </CardContent>
                 <CardFooter>

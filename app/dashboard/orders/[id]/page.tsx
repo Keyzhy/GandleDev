@@ -5,15 +5,37 @@ import {unstable_noStore as noStore} from "next/cache";
 
 async function getData(orderId: string) {
     const data = await prisma.order.findUnique({
-        where: {
-            id: orderId,
-        },
+        where: {id: orderId},
+        select:{
+            id: true,
+            status: true,
+            amount: true,
+            createdAt: true,
+            statuscomm: true,
+            shippingName: true,
+            shippingAdressLine1: true,
+            shippingAdressLine2: true,
+            shippingCity: true,
+            shippingPostalCode: true,
+            shippingCountry: true,
+            shippingOption: true,
+            LineItems: true,
+        }
     });
 
     if(!data) {
         return notFound();
     }
-    return data;
+
+    const transformedLineItems = data.LineItems.map((item: any)=> ({
+        description: item.description ||"",
+        quantity: item.quantity || 0,
+        price: item.price || 0, 
+    }));
+    return{
+        ...data,
+        LineItems: transformedLineItems,
+    }
 }
 
 interface Params{
