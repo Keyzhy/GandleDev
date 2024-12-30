@@ -3,6 +3,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
+import {Plus} from 'lucide-react';
 
 interface iAppProps{
     item:{
@@ -19,15 +20,14 @@ interface iAppProps{
 export function ProductCard({item}: iAppProps){
     
     return(
-        <div className="rounded-lg w-80 h-[480px] sm:w-80 sm:h-[480px] mt-3 relative">
+        <div className="rounded-2xl w-80 h-[48px] sm:w-80 sm:h-[460px] mt-3 relative bg-white">
             
             <Carousel className="w-full mx-auto">
                 <CarouselContent>
                     {item.images.map((item, index) =>(
                         <CarouselItem key={index}>
                             <div className="relative h-[380px]">
-                                <Image src={item} alt="Product Image" fill className="object-cover object-center w-full h-full rounded-lg"/>
-
+                                <Image src={item} alt="Product Image" fill className="object-cover object-center w-full h-full rounded-t-2xl"/>
                             </div>
                         </CarouselItem>
                     ))}
@@ -37,14 +37,16 @@ export function ProductCard({item}: iAppProps){
                 <CarouselNext className="mr-16"/>
             </Carousel>
 
-            <div className="flex justify-between items-center mt-3">
-                <h1 className="font-semibold text-xl">{item.name}</h1>
-                <h3 className="inline-flex  items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-primary/10">{item.price} €</h3>
+            <div className="flex justify-between items-center mt-6">
+            <Link href={`/product/${item.id}`}>
+                <h1 className="font-semibold text-xl pl-2">{item.name}</h1>
+            </Link>
+                <h3 className="inline-flex  items-center rounded-md bg-[]/10 px-2 py-1 text-s font-medium text-primary ring-1 ring-primary/10">{item.price} €</h3>
             </div>
             <Link href={`/product/${item.id}`}>
-            <Button className="w-full mt-30">
-                En savoir plus
-            </Button>
+            <span className=" absolute top-2 right-2 bg-[#BFA48C] text-white rounded-lg cursor-pointer">
+                <Plus className="w-10 h-10"/>
+            </span>
             </Link>
         </div>
     );
