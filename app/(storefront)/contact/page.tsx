@@ -13,7 +13,7 @@ export default function ContactRoute() {
         <div className="w-full md:w-1/2 flex flex-col  space-y-6">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Contactez nous</h1>
           <p className="text-base sm:text-lg text-gray-600">
-            Si vous avez des questions ou des commentaires, n'hésitez pas à nous contacter en utilisant le formulaire.
+            Si vous avez des questions ou des commentaires, n&apos;hésitez pas à nous contacter en utilisant le formulaire.
           </p>
           <div className="relative w-full aspect-video">
             <Image
