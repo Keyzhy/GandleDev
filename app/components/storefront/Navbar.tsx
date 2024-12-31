@@ -19,7 +19,7 @@ export async function Navbar() {
 
     return (
         <nav className="relative rounded-2xl w-full z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between bg-white">
-            <div className="flex items-center ml-12">
+            <div className="flex items-center ml-10 sm:justify-center">
                 <Link href="/">
                     <Image src="/logo.png" alt="logo" width={80} height={80}/>
                 </Link>

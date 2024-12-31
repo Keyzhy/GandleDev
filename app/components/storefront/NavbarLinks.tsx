@@ -29,6 +29,11 @@ export const navbarLinks = [
         id:4,
         name:"Diffuseurs",
         href:"/products/diffuseurs"
+    },
+    {
+        id:5,
+        name:"Contact",
+        href:"/contact"
     }
 ]
 
