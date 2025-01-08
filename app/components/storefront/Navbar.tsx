@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { NavbarLinks } from "./NavbarLinks";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag,Settings } from "lucide-react";
 import { UserDropdown } from "./UserDropdown";
 import { Button } from "@/components/ui/button";
 import {LoginLink, RegisterLink} from '@kinde-oss/kinde-auth-nextjs/components';
@@ -29,7 +29,12 @@ export async function Navbar() {
 
             <div className="flex items-center">
                 { user ? (
-                    <>
+                    <> 
+                        {(user.email == 'yannisboulaid1@gmail.com' || user.email == 'domecq.raphael@gmail.com') && (
+                            <Link href="/dashboard" className="group p-2 flex items-center mr-2">
+                                <Settings className="h-6 w-6 text-red-500 group-hover:text-red-600" />
+                            </Link>
+                        )}
                         <Link href="/bag" className="group p-2 flex items-center mr-2">
                             <ShoppingBag className="h-6 w-6 text-gray-400 group-hover:text-gray-500" />
                             <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{total}</span>

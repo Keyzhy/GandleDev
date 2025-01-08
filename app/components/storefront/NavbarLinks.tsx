@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation"
 export const navbarLinks = [
     {
         id: 0,
-        name: 'Acceuil',
+        name: 'Accueil',
         href: "/",
     },
     {

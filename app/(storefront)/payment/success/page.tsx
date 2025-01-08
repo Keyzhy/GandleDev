@@ -15,7 +15,7 @@ export default function SuccessRoute(){
                         <h3 className="text-lg leading-6 font-medium">Paiement effectué</h3>
                         <p className="mt-2 text-sm text-muted-foreground">Merci pour votre achat.</p>
                         <Button asChild className="w-full mt-5 sm:mt-6">
-                            <Link href={"/"}>Acceuil</Link>
+                            <Link href={"/"}>Accueil</Link>
                         </Button>
                     </div>
                 </div>

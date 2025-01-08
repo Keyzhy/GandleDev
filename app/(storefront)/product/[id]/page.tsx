@@ -7,6 +7,7 @@ import prisma from "@/app/lib/db";
 import { StarIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 async function getData(productId: string) {
   const data = await prisma.product.findUnique({
@@ -52,7 +53,7 @@ export default async function ProductIdRoute({
           <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
             {data.name}
           </h1>
-          <p className="text-3xl mt-2 text-gray-900">${data.price}</p>
+          <p className="text-3xl mt-2 text-gray-900">{data.price} € </p>
           <div className="mt-3 flex items-center gap-1">
             <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
             <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
@@ -62,7 +63,26 @@ export default async function ProductIdRoute({
           </div>
           <p className="text-base text-gray-700 mt-6">{data.description}</p>
 
-          <p className="text-base text-gray-700 mt-6">Composition: {data.composition}</p>
+          <Accordion type="multiple" className="mt-6" >
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Composition: </AccordionTrigger>
+              <AccordionContent className="text-base text-gray-700"> {data.composition}</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Temps de combustion </AccordionTrigger>
+              <AccordionContent className="text-base text-gray-700"> 2 heures </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>Caractère </AccordionTrigger>
+              <AccordionContent className="text-base text-gray-700"> non renseigné </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger>Composition et informations réglementaires </AccordionTrigger>
+              <AccordionContent className="text-base text-gray-700"> non renseigné </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+
+          
           <p className="text-base text-gray-700 mt-6">Parfum: {data.parfum}</p>
 
           <form action={addProducttoShoppingCart}>

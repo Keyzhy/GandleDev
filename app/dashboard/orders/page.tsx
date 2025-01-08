@@ -57,7 +57,6 @@ export default async function OrdersPage(){
                             <TableRow>
                                 <TableHead>Client</TableHead>
                                 <TableHead>Type</TableHead>
-                                <TableHead>Status du paiement</TableHead>
                                 <TableHead>Statut de la commande</TableHead>
                                 <TableHead>Date</TableHead>
                                 <TableHead className="text-right">Montant</TableHead>
@@ -71,7 +70,6 @@ export default async function OrdersPage(){
                                     <p className="hidden md:flex text-sm text-muted-foreground">{item.User?.email}</p>
                                 </TableCell>
                                 <TableCell> Commande </TableCell>
-                                <TableCell>{item.status}</TableCell>
                                 <TableCell>{orderStatusMapping[item.statuscomm]}</TableCell>
                                 <TableCell>{new Intl.DateTimeFormat('en-GB').format(item.createdAt)}</TableCell>
                                 <TableCell className="text-right">{new Intl.NumberFormat('de-DE').format(item.amount / 100)} €</TableCell>
