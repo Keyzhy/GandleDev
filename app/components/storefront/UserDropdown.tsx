@@ -27,7 +27,7 @@ export function UserDropdown({email,name,userImage}: iAppProps){
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator/>
                 <DropdownMenuItem asChild>
-                    <LogoutLink>Log out</LogoutLink>
+                    <LogoutLink>Se déconnecter</LogoutLink>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

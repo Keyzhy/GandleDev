@@ -20,6 +20,8 @@ async function getData(productId: string) {
       description: true,
       name: true,
       composition: true,
+      tempscombustion: true,
+      contenance: true,
       parfum: true,
       id: true,
     },
@@ -65,20 +67,20 @@ export default async function ProductIdRoute({
 
           <Accordion type="multiple" className="mt-6" >
             <AccordionItem value="item-1">
-              <AccordionTrigger>Composition: </AccordionTrigger>
-              <AccordionContent className="text-base text-gray-700"> {data.composition}</AccordionContent>
+              <AccordionTrigger>Contenance: </AccordionTrigger>
+              <AccordionContent className="text-base text-gray-700"> {data.contenance}</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger>Temps de combustion </AccordionTrigger>
-              <AccordionContent className="text-base text-gray-700"> 2 heures </AccordionContent>
+              <AccordionContent className="text-base text-gray-700"> {data.tempscombustion} </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>Caractère </AccordionTrigger>
-              <AccordionContent className="text-base text-gray-700"> non renseigné </AccordionContent>
+              <AccordionContent className="text-base text-gray-700"> {data.parfum} </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
               <AccordionTrigger>Composition et informations réglementaires </AccordionTrigger>
-              <AccordionContent className="text-base text-gray-700"> non renseigné </AccordionContent>
+              <AccordionContent className="text-base text-gray-700"> {data.composition}</AccordionContent>
             </AccordionItem>
           </Accordion>
 

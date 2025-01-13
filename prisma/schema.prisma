@@ -32,6 +32,8 @@ model Product {
   status ProductStatus
   parfum String @default("non renseigné")
   composition String @default("non renseigné")
+  tempscombustion Int @default(0)
+  contenance Int @default(0)
   poids Int @default(0)
   price Int
   images String[]

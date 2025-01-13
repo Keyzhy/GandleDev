@@ -28,6 +28,8 @@ interface iAppProps {
         parfum: string;
         poids: number;
         composition: string;
+        tempscombustion: number;
+        contenance: number;
         price: number;
         images: string[];
         stock: number;
@@ -87,7 +89,7 @@ export function EditForm({  productdata }: iAppProps){
                             <p className="text-red-500">{fields.name.errors}</p>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label>Description</Label>
+                        <Label className=" text-lg text-bold">Description</Label>
                             <Textarea key={fields.description.key}
                                 name={fields.description.name}
                                 defaultValue={productdata.description}
@@ -96,7 +98,7 @@ export function EditForm({  productdata }: iAppProps){
                                 <p className="text-red-500">{fields.description.errors}</p>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label>Prix</Label>
+                            <Label className=" text-lg text-bold">Prix</Label>
                             <Input key={fields.price.key}
                                 type="number"
                                 name={fields.price.name}
@@ -106,7 +108,7 @@ export function EditForm({  productdata }: iAppProps){
                                 <p className="text-red-500">{fields.price.errors}</p>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label>Stock</Label>
+                        <Label className=" text-lg text-bold">Stock</Label>
                             <Input key={fields.stock.key}
                                 type="number"
                                 name={fields.stock.name}
@@ -116,7 +118,7 @@ export function EditForm({  productdata }: iAppProps){
                                 <p className="text-red-500">{fields.stock.errors}</p>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label>Nouveauté</Label>
+                        <Label className=" text-lg text-bold">Nouveauté</Label>
                             <Switch key={fields.isFeatured.key}
                                 name={fields.isFeatured.name}
                                 defaultChecked={productdata.isFeatured}
@@ -124,7 +126,7 @@ export function EditForm({  productdata }: iAppProps){
                                 <p className="text-red-500">{fields.isFeatured.errors}</p>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label>Status</Label>
+                        <Label className=" text-lg text-bold">Status</Label>
                             <Select key={fields.status.key}
                                 name={fields.status.name}
                                 defaultValue={productdata.status}>
@@ -139,7 +141,7 @@ export function EditForm({  productdata }: iAppProps){
                             <p className="text-red-500">{fields.status.errors}</p>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label className=" text-l text-bold">Parfum</Label>
+                            <Label className=" text-lg text-bold">Parfum</Label>
                             <Input 
                                 type="text"
                                 key={fields.parfum.key}
@@ -151,7 +153,7 @@ export function EditForm({  productdata }: iAppProps){
                             <p className="text-red-500">{fields.parfum.errors}</p>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label className=" text-l text-bold">Poids </Label>
+                            <Label className=" text-lg text-bold">Poids </Label>
                             <Input 
                                 type="text"
                                 key={fields.poids.key}
@@ -164,7 +166,7 @@ export function EditForm({  productdata }: iAppProps){
                             <p className="text-red-500">{fields.poids.errors}</p>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Label className=" text-l text-bold">Composition</Label>
+                            <Label className=" text-lg text-bold">Composition</Label>
                             <Textarea
                                 key={fields.composition.key}
                                 name={fields.composition.name}
@@ -174,9 +176,32 @@ export function EditForm({  productdata }: iAppProps){
                             />
                             <p className="text-red-500">{fields.composition.errors}</p>
                         </div>
-
                         <div className="flex flex-col gap-3">
-                            <Label>Catégorie</Label>
+                            <Label className=" text-lg text-bold">Temps de combustion</Label>
+                            <Input 
+                                type="text"
+                                key={fields.tempscombustion.key}
+                                name={fields.tempscombustion.name}
+                                defaultValue={productdata.tempscombustion}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <p className="text-red-500">{fields.tempscombustion.errors}</p>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <Label className=" text-lg text-bold">Contenance</Label>
+                            <Input 
+                                type="text"
+                                key={fields.contenance.key}
+                                name={fields.contenance.name}
+                                defaultValue={productdata.contenance}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <p className="text-red-500">{fields.contenance.errors}</p>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                        <Label className=" text-lg text-bold">Catégorie</Label>
                             <Select 
                                 key={fields.category.key}
                                 name={fields.category.name}
@@ -197,7 +222,7 @@ export function EditForm({  productdata }: iAppProps){
                         </div>
 
                         <div className="flex flex-col gap-3">
-                            <Label>Images</Label>
+                        <Label className=" text-lg text-bold">Images</Label>
                             <input type ="hidden" 
                                 value={images} 
                                 key={fields.images.key} 

@@ -7,6 +7,8 @@ export const productSchema = z.object({
   parfum: z.string(),
   poids: z.number().min(0),
   composition: z.string(),
+  tempscombustion: z.number().min(0),
+  contenance: z.number().min(0),
   price: z.number().min(1),
   images: z.array(z.string()).min(1, "Publier au moins une image"),
   stock: z.number().min(1),

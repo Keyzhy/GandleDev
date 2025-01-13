@@ -8,14 +8,14 @@ import bougie from '@/public/bougie.jpg'
 
 export default function ContactRoute() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-2 sm:p-5 md:p-7">
+    <div className="min-h-screen flex items-center justify-center p-2  sm:p-5 md:p-7">
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 flex flex-col  space-y-6">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Contactez nous</h1>
           <p className="text-base sm:text-lg text-gray-600">
             Si vous avez des questions ou des commentaires, n&apos;hésitez pas à nous contacter en utilisant le formulaire.
           </p>
-          <div className="relative w-full aspect-video">
+          <div className=" w-full aspect-video">
             <Image
               src={bougie}
               alt="Bougie"

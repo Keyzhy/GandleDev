@@ -20,7 +20,8 @@ interface iAppProps{
 export function ProductCard({item}: iAppProps){
     
     return(
-        <div className="rounded-2xl w-80 h-[48px] sm:w-80 sm:h-[460px] mt-3 relative bg-white">
+        <div className="rounded-2xl w-full max-w-xs sm:w-80 h-auto mt-3 relative bg-white shadow-lg">
+
             
             <Carousel className="w-full mx-auto">
                 <CarouselContent>
@@ -44,7 +45,7 @@ export function ProductCard({item}: iAppProps){
             
                 <h3 className="inline-flex  items-center rounded-md bg-[]/10 px-2 py-1 text-s font-medium text-primary ring-1 ring-primary/10">{item.price} €</h3>
             </div>
-            <div className="mt-2 ml-2 flex items-center gap-1">
+            <div className="m-2 flex items-center gap-1">
             <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
             <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
             <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
