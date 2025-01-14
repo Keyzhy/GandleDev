@@ -5,6 +5,10 @@ import { usePathname } from "next/navigation";
 
 const links= [
     {
+        name: "Accueil",
+        href: "/",
+    },
+    {
         name: "Dashboard",
         href: "/dashboard",
     },
@@ -19,7 +23,8 @@ const links= [
     {
         name: "Bannière",
         href: "/dashboard/banner",
-    }
+    },
+
 ];
 
 export function DashboardNavigation(){

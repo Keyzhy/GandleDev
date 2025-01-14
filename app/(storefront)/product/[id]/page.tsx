@@ -49,7 +49,7 @@ export default async function ProductIdRoute({
   const addProducttoShoppingCart = addItem.bind(null, data.id);
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6 md:mt-36 sm:px-24">
         <ImageSlider images={data.images} />
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
