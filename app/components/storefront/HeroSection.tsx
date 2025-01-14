@@ -18,7 +18,7 @@ export default function HeroSection() {
   
         {/* Contenu texte */}
         <div className="absolute z-20 top-28 sm:top-64 w-full">
-          <div className="max-w-6xl mx-auto px-6"> {/* Alignement identique à la navbar */}
+          <div className="max-w-6xl mx-auto "> {/* Alignement identique à la navbar */}
             <h1 className="text-4xl md:text-5xl font-bold mb-4 max-w-lg">
               Bienvenue dans notre boutique
             </h1>
