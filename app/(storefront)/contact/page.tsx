@@ -8,7 +8,7 @@ import bougie from '@/public/bougie.jpg'
 
 export default function ContactRoute() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-2  sm:p-5 md:p-7">
+    <div className=" flex items-center justify-center sm:p-5 md:p-7  md:mt-32">
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 flex flex-col  space-y-6">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Contactez nous</h1>
@@ -34,11 +34,11 @@ export default function ContactRoute() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="name" className="text-sm sm:text-base">Nom</Label>
-                  <Input id="name" placeholder="Jean Michel" className="text-sm sm:text-base p-2 sm:p-3" />
+                  <Input id="name" placeholder="Votre nom ici..." className="text-sm sm:text-base p-2 sm:p-3" />
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="email" className="text-sm sm:text-base">Email</Label>
-                  <Input id="email" placeholder="jean@exemple.com" type="email" className="text-sm sm:text-base p-2 sm:p-3" />
+                  <Input id="email" placeholder="exemple@exemple.com" type="email" className="text-sm sm:text-base p-2 sm:p-3" />
                 </div>
               </div>
               <div className="flex flex-col space-y-1.5">

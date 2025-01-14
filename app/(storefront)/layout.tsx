@@ -19,10 +19,10 @@ export default function StoreFrontLayout ({
     }) {
     return (
         <>
-        <div className="{playfair.className} pt-5 bg-background">
+        <div className="{playfair.className}bg-background">
         <Header/>
         
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</main>
+        <main className="">{children}</main>
         <TailwindIndicator/>
         <Footer/>
         </div>

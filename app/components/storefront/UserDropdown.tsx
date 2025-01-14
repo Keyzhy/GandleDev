@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import {LogoutLink} from '@kinde-oss/kinde-auth-nextjs/components';
+import { User } from "lucide-react";
 
 interface iAppProps {
     email: string;
@@ -12,13 +13,8 @@ interface iAppProps {
 export function UserDropdown({email,name,userImage}: iAppProps){
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger  asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                    <Avatar className="h-10 w-10">
-                        <AvatarImage src={userImage} alt="User Image"/>
-                        <AvatarFallback>{name.slice(0,3).toUpperCase()}</AvatarFallback>
-                    </Avatar>
-                </Button>
+            <DropdownMenuTrigger>
+                    <User className="H-6 w-6 sm:h-7 sm:w-7 hover:text-gray-700"/>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="flex flex-col space-y-2">
