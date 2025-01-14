@@ -22,7 +22,7 @@ export default function HeroSection() {
           Bienvenue dans notre boutique
         </h1>
         <p className="text-lg md:text-xl mb-6">
-          Découvrez notre collection exclusive et profitez d'offres exceptionnelles.
+          Découvrez notre collection exclusive et profitez d&aposoffres exceptionnelles.
         </p>
         <Button className="px-6 py-3">
         <Link href={'/products/all'}> Découvrir</Link>
