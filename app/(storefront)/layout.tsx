@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { Navbar } from "../components/storefront/Navbar";
+
 import { Footer } from "../components/storefront/Footer";
 import {Playfair_Display} from 'next/font/google';
 
