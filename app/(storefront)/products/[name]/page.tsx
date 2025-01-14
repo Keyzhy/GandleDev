@@ -106,7 +106,7 @@ export default async function CategoriesPage({
     return (
         <section className="md:mt-40 md:px-12"> {/* Padding-top pour décaler sous la navbar */}
             <h1 className="text-3xl font-semibold my-5 ml-12">{title}</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start lg:gap-x-24 py-6 sm:px-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start lg:gap-x-24 py-6 sm:px-24">
                 {data.map((item) => (
                     <ProductCard item={item} key={item.id} />
                 ))}
