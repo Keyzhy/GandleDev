@@ -27,7 +27,7 @@ export default function FeaturesSection() {
               Frais de port offert
             </h2>
             <p className="text-gray-600">
-              À partir de 80 € d'achat la livraison est OFFERTE
+              À partir de 80 € d`&apos;`achat la livraison est OFFERTE
             </p>
           </div>
 

@@ -29,6 +29,7 @@ async function getData(orderId: string) {
 
     // Transformer les LineItems pour inclure les images des produits
     const transformedLineItems = await Promise.all(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         data.LineItems.map(async (item: any) => {
             const product = await prisma.product.findFirst({
                 where: { name: item.description }, // Supposons que "name" correspond au champ de description
