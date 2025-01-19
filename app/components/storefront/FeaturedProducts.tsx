@@ -29,7 +29,7 @@ async function getData(){
 export  function FeaturedProducts(){
     return(
         <>
-            <div className="max-w-6xl mx-auto ">
+            <div className="max-w-6xl mx-auto py-7 ">
             <h2 className="text-2xl font-extrabold tracking-tight">Nouveautés</h2>
             <Suspense fallback={<LoadingRows/>}>
             <LoadFeaturedProducts />

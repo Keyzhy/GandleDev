@@ -1,9 +1,10 @@
 import prisma from "@/app/lib/db";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table,TableHeader, TableRow,TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Pencil } from "lucide-react";
 import {unstable_noStore as noStore} from "next/cache";
 import Link from "next/link";
 
@@ -15,6 +16,15 @@ const orderStatusMapping = {
     attenteenvoi: "Attente Envoi",
     communiquetransporteur: "Communiqué Transporteur",
   };
+
+  const statusColorMapping = {
+    nontraite: "text-orange-500",
+    horsstock: "text-red-500",
+    delaisapporvisionnement: "text-yellow-500",
+    preparation: "text-blue-500",
+    attenteenvoi: "text-indigo-500",
+    communiquetransporteur: "text-green-500",
+};
   
 
 async function getData(){
@@ -56,8 +66,8 @@ export default async function OrdersPage(){
                         <TableHeader>
                             <TableRow>
                                 <TableHead>Client</TableHead>
-                                <TableHead>Type</TableHead>
-                                <TableHead>Statut de la commande</TableHead>
+                                
+                                <TableHead>Statut</TableHead>
                                 <TableHead>Date</TableHead>
                                 <TableHead className="text-right">Montant</TableHead>
                             </TableRow>
@@ -69,23 +79,16 @@ export default async function OrdersPage(){
                                     <p>{item.User?.firstname}</p>
                                     <p className="hidden md:flex text-sm text-muted-foreground">{item.User?.email}</p>
                                 </TableCell>
-                                <TableCell> Commande </TableCell>
-                                <TableCell>{orderStatusMapping[item.statuscomm]}</TableCell>
+                                
+                                <TableCell className={statusColorMapping[item.statuscomm]}>
+                                    {orderStatusMapping[item.statuscomm]}
+                                    </TableCell>
                                 <TableCell>{new Intl.DateTimeFormat('en-GB').format(item.createdAt)}</TableCell>
                                 <TableCell className="text-right">{new Intl.NumberFormat('de-DE').format(item.amount / 100)} €</TableCell>
                                 <TableCell className="text-end">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button size="icon" variant="ghost">
-                                                <MoreHorizontal />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end">
-                                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                            <DropdownMenuSeparator/>
-                                            <DropdownMenuItem asChild><Link href={`/dashboard/orders/${item.id}`}>Voir</Link></DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
+                                    <Link href={`/dashboard/orders/${item.id}`}>
+                                    <Pencil className="group-hover:text-gray-600"/>
+                                    </Link>
                                 </TableCell>
                             </TableRow>
                             ))}
