@@ -64,22 +64,7 @@ export async function POST(req: Request){
                     })),
                 }
             });
-
-            for (const item of lineItems.data) {
-                const productId = item.id;// Assurez-vous que l'ID produit est correctement mappé
-                const quantity = item.quantity;
-
-                if (productId && quantity) {
-                    await prisma.product.update({
-                        where: { id: productId },
-                        data: {
-                            stock: {
-                                decrement: quantity,
-                            },
-                        },
-                    });
-                }
-            };
+            
 
             await redis.del(`cart-${session.metadata?.userId}`);
             break;
