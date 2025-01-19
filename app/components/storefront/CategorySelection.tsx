@@ -6,7 +6,7 @@ import diffuseur from'@/public/diffuseur.jpg'
 
 export function CategoriesSelection(){
     return(
-        <div className="py-16 sm:py-20 px-10 sm:px-24">
+        <div className="py-16 max-w-6xl mx-auto ">
             <div  className="flex justify-between items-center">
                 <h2 className="text-2xl font-extrabold tracking-tight">Nos catégories de produits</h2>
 
