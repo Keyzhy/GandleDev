@@ -158,6 +158,30 @@ export default function ProductCreateRoute(){
                             />
                             <p className="text-red-500">{fields.composition.errors}</p>
                         </div>
+                        <div className="flex flex-col gap-3">
+                            <Label className=" text-l text-bold">Temps de combustion</Label>
+                            <Input 
+                                type="text"
+                                key={fields.tempscombustion.key}
+                                name={fields.tempscombustion.name}
+                                defaultValue={fields.tempscombustion.initialValue}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <p className="text-red-500">{fields.tempscombustion.errors}</p>
+                        </div>
+                        <div className="flex flex-col gap-3">
+                            <Label className=" text-l text-bold">Contenance</Label>
+                            <Input 
+                                type="text"
+                                key={fields.contenance.key}
+                                name={fields.contenance.name}
+                                defaultValue={fields.contenance.initialValue}
+                                className="w-full"
+                                placeholder="Nom du produit"
+                            />
+                            <p className="text-red-500">{fields.contenance.errors}</p>
+                        </div>
 
                         <div className="flex flex-col gap-3">
                             <Label>Catégorie</Label>

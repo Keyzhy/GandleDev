@@ -55,6 +55,7 @@ model Banner{
 
 model Order{
   id String @id @default(uuid())
+  orderNumber String @default("non renseigné")
   status String @default("pending")
   amount Int
   statuscomm OrderStatus @default(nontraite)

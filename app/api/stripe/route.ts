@@ -40,6 +40,8 @@ export async function POST(req: Request){
             const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
 
 
+
+
             // Optionnel : récupérer les détails du shipping_rate via l'API Stripe
             
             
@@ -48,6 +50,7 @@ export async function POST(req: Request){
                 data:{
                     amount: session.amount_total as number ,
                     status: session.status as string,
+                    orderNumber: session.metadata?.orderNumber,
                     userId: session.metadata?.userId,
                     shippingName: shippingName || '',
                     shippingAdressLine1: shippingAddress?.line1 || '',

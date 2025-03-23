@@ -1,4 +1,4 @@
-import { checkOut, deleteItem } from "@/app/actions";
+import { checkOut, deleteItem, Metadata } from "@/app/actions";
 import { CheckOutButton, DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
@@ -23,9 +23,10 @@ export default async function BagRoute() {
 
     cart?.items.forEach((item) => {
         totalPrice += item.price * item.quantity;
-
-
     })
+    const metadata: Metadata= {
+        orderNumber: crypto.randomUUID()
+    }
 
 
     return(
@@ -66,7 +67,7 @@ export default async function BagRoute() {
                             <p>{new Intl.NumberFormat('de-DE').format(totalPrice)} €</p>
                         </div>
 
-                        <form action={checkOut}>
+                        <form action={async () => await checkOut(metadata)}>
                             <CheckOutButton/>
                         </form>
 

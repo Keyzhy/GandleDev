@@ -23,4 +23,5 @@ export const bannerSchema = z.object({
 
 export const orderSchema = z.object({
   statuscomm: z.enum(["nontraite", "horsstock", "delaisapporvisionnement", "preparation", "attenteenvoi", "communiquetransporteur"]),
+  orderNumber: z.string()
 })
