@@ -4,16 +4,29 @@ import { checkOut, deleteItem, Metadata } from "@/app/actions";
 import { CheckOutButton, DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
+import { getKindeServerSession, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server"
 import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation"
 import {unstable_noStore as noStore} from "next/cache";
+import { useEffect, useState } from "react";
+import Loader from "@/app/components/storefront/Loader";
+import { Button } from "@/components/ui/button";
 
 export default async function BagRoute() {
     noStore();
     const {getUser} = getKindeServerSession()
     const user = await getUser()
+    const [isLoading, setIsLoading] = useState(false);
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+      }, []);
+    
+      if (!isClient) {
+        return <Loader />;
+      }
 
     if(!user) {
         redirect("/");
@@ -26,9 +39,26 @@ export default async function BagRoute() {
     cart?.items.forEach((item) => {
         totalPrice += item.price * item.quantity;
     })
-    const metadata: Metadata= {
-        orderNumber: crypto.randomUUID()
-    }
+    const handleCheckout = async () => {
+        if (!user) return;
+        setIsLoading(true);
+    
+        try {
+          const metadata: Metadata = {
+            orderNumber: crypto.randomUUID(),
+          };
+    
+          const checkoutUrl = await checkOut( metadata);
+    
+          if (checkoutUrl) {
+            window.location.href = checkoutUrl;
+          }
+        } catch (error) {
+          console.error("Error creating checkout session:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
 
 
     return(
@@ -69,13 +99,25 @@ export default async function BagRoute() {
                             <p>{new Intl.NumberFormat('de-DE').format(totalPrice)} €</p>
                         </div>
 
-                        <form action={async () => await checkOut(metadata)}>
-                            <CheckOutButton/>
-                        </form>
+                        {user ? (
+            <button
+              onClick={handleCheckout}
+              disabled={isLoading}
+              className="mt-4 w-full bg-[#BFA48C] text-white px-4 py-2 rounded  disabled:bg-gray-400"
+            >
+              {isLoading ? "Processing..." : "Checkout"}
+            </button>
+          ) : (
+            
+            <Button variant="ghost" asChild>
+            <LoginLink className="mt-4 w-full bg-[#BFA48C] text-white px-4 py-2 rounded ">Sign in to Checkout</LoginLink>
+          </Button>
+          )}
 
                     </div>
                 </div>
             )}
         </div>
+
     )
 }
