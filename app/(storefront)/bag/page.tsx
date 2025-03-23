@@ -12,14 +12,18 @@ import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
-import { useEffect, useState } from "react";
-import Loader from "@/app/components/storefront/Loader";
+
 import { Button } from "@/components/ui/button";
 
 export default async function BagRoute() {
   noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
+  const metadata: Metadata = {
+   orderNumber: crypto.randomUUID(),
+  };
+
 
   if (!user) {
     redirect("/");
@@ -32,23 +36,7 @@ export default async function BagRoute() {
   cart?.items.forEach((item) => {
     totalPrice += item.price * item.quantity;
   });
-  const handleCheckout = async () => {
-    if (!user) return;
-
-    try {
-      const metadata: Metadata = {
-        orderNumber: crypto.randomUUID(),
-      };
-
-      const checkoutUrl = await checkOut(metadata);
-
-      if (checkoutUrl) {
-        window.location.href = checkoutUrl;
-      }
-    } catch (error) {
-      console.error("Error creating checkout session:", error);
-    }
-  };
+  
 
   return (
     <div className="max-w-2xl mx-auto mt-10 min-h-[55vh] md:mt-48">
@@ -95,20 +83,10 @@ export default async function BagRoute() {
               <p>{new Intl.NumberFormat("de-DE").format(totalPrice)} €</p>
             </div>
 
-            {user ? (
-              <button
-                onClick={handleCheckout}
-                className="mt-4 w-full bg-[#BFA48C] text-white px-4 py-2 rounded  disabled:bg-gray-400"
-              >
-                Checkout
-              </button>
-            ) : (
-              <Button variant="ghost" asChild>
-                <LoginLink className="mt-4 w-full bg-[#BFA48C] text-white px-4 py-2 rounded ">
-                  Sign in to Checkout
-                </LoginLink>
-              </Button>
-            )}
+            <form action={async () => await checkOut(metadata)}>
+ 
+                            <CheckOutButton/>
+                        </form>
           </div>
         </div>
       )}
