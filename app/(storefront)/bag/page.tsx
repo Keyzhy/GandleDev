@@ -1,3 +1,5 @@
+"use client"
+
 import { checkOut, deleteItem, Metadata } from "@/app/actions";
 import { CheckOutButton, DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
