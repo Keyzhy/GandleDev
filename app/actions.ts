@@ -10,9 +10,6 @@ import { revalidatePath } from "next/cache";
 import { stripe } from "./lib/stripe";
 import Stripe from "stripe";
 
-export type Metadata= {
-    orderNumber: string;
-}
 
 export async function createProduct(
   previousState: unknown,
@@ -313,7 +310,7 @@ export async function deleteItem(formData: FormData) {
   revalidatePath("/bag");
 }
 
-export async function checkOut(metadata: Metadata) {
+export async function checkOut() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -324,6 +321,7 @@ export async function checkOut(metadata: Metadata) {
   let cart: Cart | null = await redis.get(`cart-${user.id}`);
 
   let totalPrice = 0;
+  const orderNumber = crypto.randomUUID();
 
   cart?.items.forEach((item) => {
     totalPrice += item.price * item.quantity;
@@ -420,14 +418,14 @@ export async function checkOut(metadata: Metadata) {
       shipping_options: shippingOptions,
       success_url:
         process.env.NODE_ENV === "development"
-          ? `http://localhost:3000/payment/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`
-          : `https://gandle-dev.vercel.app/payment/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
+          ? `http://localhost:3000/payment/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${orderNumber}`
+          : `https://gandle-dev.vercel.app/payment/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${orderNumber}`,
       cancel_url:
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000/payment/cancel"
           : "https://gandle-dev.vercel.app/payment/cancel",
       metadata: {
-        orderNumber: metadata.orderNumber,
+        orderNumber:orderNumber,
         userId: user.id,
         orderInfo: JSON.stringify(orderInfo),
       },

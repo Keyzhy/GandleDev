@@ -1,28 +1,24 @@
-"use client";
 
-import { checkOut, deleteItem, Metadata } from "@/app/actions";
+
+import { checkOut, deleteItem } from "@/app/actions";
 import { CheckOutButton, DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
 import {
   getKindeServerSession,
-  LoginLink,
 } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
 
-import { Button } from "@/components/ui/button";
+
 
 export default async function BagRoute() {
   noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  const metadata: Metadata = {
-   orderNumber: crypto.randomUUID(),
-  };
 
 
   if (!user) {
@@ -83,12 +79,16 @@ export default async function BagRoute() {
               <p>{new Intl.NumberFormat("de-DE").format(totalPrice)} €</p>
             </div>
 
-            <form action={async () => await checkOut(metadata)}>
- 
-                            <CheckOutButton/>
-                        </form>
+            <button
+              onClick={checkOut}
+
+              className="mt-4 w-full bg-[#BFA48C] text-white px-4 py-2 rounded  disabled:bg-gray-400"
+            >
+              Checkout
+            </button>
           </div>
         </div>
+        
       )}
     </div>
   );
