@@ -25,3 +25,10 @@ export const orderSchema = z.object({
   statuscomm: z.enum(["nontraite", "horsstock", "delaisapporvisionnement", "preparation", "attenteenvoi", "communiquetransporteur"]),
   
 })
+
+export const formSchema = z.object({
+  firstName: z.string().min(2).max(50),
+  subject: z.string().min(2).max(50),
+  email: z.string().email(),
+  message: z.string().min(2),
+})

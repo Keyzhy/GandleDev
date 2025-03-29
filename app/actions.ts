@@ -434,3 +434,4 @@ export async function checkOut() {
     return redirect(session.url as string);
   }
 }
+

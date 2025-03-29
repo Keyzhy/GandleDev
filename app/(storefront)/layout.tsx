@@ -5,6 +5,7 @@ import {Playfair_Display} from 'next/font/google';
 
 import { TailwindIndicator } from "../components/storefront/TailwindIndicator";
 import Header from "../components/storefront/Header";
+import { Toaster } from "sonner";
 
 
 const playfair = Playfair_Display({
@@ -25,6 +26,7 @@ export default function StoreFrontLayout ({
         <main className="">{children}</main>
         <TailwindIndicator/>
         <Footer/>
+        <Toaster/>
         </div>
         </>
     )

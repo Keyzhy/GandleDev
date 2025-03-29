@@ -30,16 +30,16 @@ function SuccessRouteContent() {
                 </div>
 
                 <h1 className="text-4xl font-bold mb-6 text-center">
-                    Thank you for your order
+                    Merci pour votre commande
                 </h1>
                 <div className="border-t border-b border-gray-200 py-6 mb-6">
                     <p className="text-lg text-gray-700 mb-4">
-                        Your order has been confirmed and will be shipped shortly.
+                        Votre commande a été confirmée et va bientot etre expédiée.
                     </p>
                     <div className="space-y-2">
                         {orderNumber && (
                             <p className="text-gray-600 flex items-center space-x-5">
-                                <span>Order Number:</span>
+                                <span>Numéro de commande:</span>
                                 <span className="font-mono text-sm text-green-600">
                                     {orderNumber}
                                 </span>
@@ -50,13 +50,14 @@ function SuccessRouteContent() {
                 <div className="space-y-4">
                     <p className="text-gray-400">
                         A confirmation email has been sent to your registered email address.
+                        Un email de confirmation a été envoyé a l`&apos;`adresse email enregistrée.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Button asChild className="bg-green-600 hover:bg-gray-700">
-                            <Link href="/orders">View Order Details</Link>
+                            <Link href="/orders">Voir les détails de la commande</Link>
                         </Button>
                         <Button asChild variant="outline">
-                            <Link href="/">Continue Shopping</Link>
+                            <Link href="/">Continuer mes achats</Link>
                         </Button>
                     </div>
                 </div>
