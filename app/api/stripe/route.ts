@@ -10,14 +10,11 @@ import Stripe from "stripe";
 
 
 export async function POST(req: Request) {
-    console.error("✅ Webhook Stripe reçu");
     try {
-        console.log("1️⃣ Webhook reçu !");
 const body = await req.text();
-console.error("2️⃣ Body récupéré :", body);
+
 
 const signature = (await headers()).get("Stripe-Signature") as string;
-console.error("3️⃣ Signature Stripe :", signature);
 let event: Stripe.Event;
 
 try {
@@ -26,30 +23,24 @@ try {
         signature,
         process.env.STRIPE_SECRET_WEBHOOK as string
     );
-    console.error("4️⃣ Webhook validé :", event.type);
 } catch (error) {
     console.error("🚨 Erreur de validation Stripe :", error);
     return new Response("Webhook Error", { status: 400 });
 }
 
 
-        console.error("🔔 Type d'événement Stripe :", event.type);
-
         const resend = new Resend(process.env.RESEND_API_KEY);
 
         switch (event.type) {
             case "checkout.session.completed": {
-                console.error("💰 Paiement confirmé, récupération des détails...");
+                console.log("💰 Paiement confirmé, récupération des détails...");
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const session = event.data.object as any;
                 const customerEmail = session.customer_details?.email;
 
-                console.error("📧 Email du client :", customerEmail);
+                console.log("📧 Email du client :", customerEmail);
 
                 const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
-
-                console.error("🛒 Produits commandés :", lineItems.data);
-
                 // Insérer la commande dans la BDD
                 await prisma.order.create({
                     data: {
@@ -82,7 +73,7 @@ try {
                     console.error("📧 Envoi de l'email de confirmation...");
                     try {
                         await resend.emails.send({
-                            from: "contact@tonsite.com",
+                            from: `Gandle <${process.env.RESEND_FROM_EMAIL}>`,
                             to: customerEmail,
                             subject: "Votre commande est confirmée 🎉",
                             react: OrderConfirmationEmail({
