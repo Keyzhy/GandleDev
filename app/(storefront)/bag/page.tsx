@@ -84,7 +84,7 @@ export default async function BagRoute() {
 
               className="mt-4 w-full bg-[#BFA48C] text-white px-4 py-2 rounded  disabled:bg-gray-400"
             >
-              Checkout
+              Procéder au paiement
             </button>
           </div>
         </div>

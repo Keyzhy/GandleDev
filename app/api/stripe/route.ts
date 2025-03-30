@@ -58,7 +58,7 @@ try {
                             id: item.id,
                             description: item.description || "Article sans nom",
                             quantity: item.quantity ?? 1,
-                            price: (item.price?.unit_amount || 0) / 100,
+                            price: (item.price?.unit_amount || 0),
                         })),
                     }
                 });
@@ -79,12 +79,12 @@ try {
                             react: OrderConfirmationEmail({
                                 name: session.shipping_details?.name || "Cher client",
                                 orderNumber: session.metadata?.orderNumber || "Inconnu",
-                                totalAmount: (session.amount_total || 0) / 100,
+                                totalAmount: (session.amount_total || 0),
                                 lineItems: lineItems.data.map(item => ({
                                     id: item.id,
                                     description: item.description || "Produit sans nom",
                                     quantity: item.quantity ?? 1,
-                                    price: (item.price?.unit_amount || 0) / 100,
+                                    price: (item.price?.unit_amount || 0),
                                 })),
                             }),
                         });
