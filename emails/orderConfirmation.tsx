@@ -57,7 +57,7 @@ export default function OrderConfirmationEmail({
 
           {/* Bouton Suivi de commande */}
           <Section style={{ textAlign: "center", marginTop: "20px" }}>
-            <Button href="https://tonsite.com/suivi" style={{ backgroundColor: "#007bff", color: "#ffffff", padding: "10px 20px", borderRadius: "5px", textDecoration: "none", fontSize: "16px" }}>
+            <Button href="https://gandle-dev.vercel.app/orders" style={{ backgroundColor: "#BFA48C", color: "#ffffff", padding: "10px 20px", borderRadius: "5px", textDecoration: "none", fontSize: "16px" }}>
               Suivre ma commande
             </Button>
           </Section>
