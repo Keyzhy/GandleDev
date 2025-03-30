@@ -73,7 +73,7 @@ try {
                     console.error("📧 Envoi de l'email de confirmation...");
                     try {
                         await resend.emails.send({
-                            from: `Gandle <${process.env.RESEND_FROM_EMAIL}>`,
+                            from: `Gandle <contact@gandle.fr>`,
                             to: customerEmail,
                             subject: "Votre commande est confirmée 🎉",
                             react: OrderConfirmationEmail({

@@ -12,7 +12,7 @@ export const send = async (emailFormData: z.infer<typeof formSchema>) => {
   try {
     // 1. Email interne à toi
     const { data: internalData, error: internalError } = await resend.emails.send({
-      from: `Gandle <${process.env.RESEND_FROM_EMAIL}>`,
+      from: `Gandle <contact@gandle.fr>`,
       to: "yannisboulaid@protonmail.com",
       subject: `Nouveau message, sujet: ${emailFormData.subject}`,
       react: ContactEmail({
