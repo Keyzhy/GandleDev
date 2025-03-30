@@ -1,51 +1,54 @@
-import { Truck, Gift, Leaf } from 'lucide-react'
+import { FadeIn } from "@/components/ui/fadeIn";
+import { Truck, Gift, Leaf } from "lucide-react";
+
 
 export default function FeaturesSection() {
   return (
-    <section className="w-full mx-auto rounded-xl bg-[#BFA48C] py-12">
-      <div className="container max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Delivery Feature */}
-          <div className="flex flex-col items-center text-center">
-            <div className="mb-4">
-              <Truck className="w-12 h-12" />
+    <section className="w-full bg-[#BFA48C] py-16">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          
+          <FadeIn delay={0}>
+            <div className="bg-[#fffaf5] border border-[#BFA48C]/40 rounded-xl shadow-sm p-8 h-full flex flex-col items-center text-center transition hover:shadow-md">
+              <Truck className="w-10 h-10 text-[#BFA48C]" />
+              <div className="w-8 h-[2px] bg-[#BFA48C] my-3" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Livraison en 48 à 72h
+              </h3>
+              <p className="text-sm text-gray-700 min-h-[3.5rem]">
+                Livraison Colissimo rapide et suivie directement chez vous.
+              </p>
             </div>
-            <h2 className="text-xl font-bold mb-2 uppercase tracking-wide">
-              Livraison en 48 à 72h
-            </h2>
-            <p className="text-gray-600">
-              Livraison colissimo garantie en 72h chez vous
-            </p>
-          </div>
+          </FadeIn>
 
-          {/* Free Shipping Feature */}
-          <div className="flex flex-col items-center text-center">
-            <div className="mb-4">
-              <Gift className="w-12 h-12 " />
+          <FadeIn delay={0.1}>
+            <div className="bg-[#fffaf5] border border-[#BFA48C]/40 rounded-xl shadow-sm p-8 h-full flex flex-col items-center text-center transition hover:shadow-md">
+              <Gift className="w-10 h-10 text-[#BFA48C]" />
+              <div className="w-8 h-[2px] bg-[#BFA48C] my-3" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Frais de port offerts
+              </h3>
+              <p className="text-sm text-gray-700 min-h-[3.5rem]">
+                Dès 80 € d’achat, la livraison est offerte.
+              </p>
             </div>
-            <h2 className="text-xl font-bold mb-2 uppercase tracking-wide">
-              Frais de port offert
-            </h2>
-            <p className="text-gray-600">
-              À partir de 80 € d`&apos;`achat la livraison est OFFERTE
-            </p>
-          </div>
+          </FadeIn>
 
-          {/* Eco-Friendly Feature */}
-          <div className="flex flex-col items-center text-center">
-            <div className="mb-4">
-              <Leaf className="w-12 h-12 " />
+          <FadeIn delay={0.2}>
+            <div className="bg-[#fffaf5] border border-[#BFA48C]/40 rounded-xl shadow-sm p-8 h-full flex flex-col items-center text-center transition hover:shadow-md">
+              <Leaf className="w-10 h-10 text-[#BFA48C]" />
+              <div className="w-8 h-[2px] bg-[#BFA48C] my-3" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Engagement écologique
+              </h3>
+              <p className="text-sm text-gray-700 min-h-[3.5rem]">
+                Tous nos contenants sont réutilisables ou recyclables.
+              </p>
             </div>
-            <h2 className="text-xl font-bold mb-2 uppercase tracking-wide">
-              Écologique 
-            </h2>
-            <p className="text-gray-600">
-              Fini le gaspillage de récipient, recyclez le !
-            </p>
-          </div>
+          </FadeIn>
+
         </div>
       </div>
     </section>
-  )
+  );
 }
-

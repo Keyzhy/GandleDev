@@ -215,15 +215,17 @@ export async function deleteBanner(formData: FormData) {
   redirect("/dashboard/banner");
 }
 
-export async function addItem(productId: string) {
+export async function addItem(productId: string, formData: FormData) {
+  const quantity = Number(formData.get("quantity") || 1);
+
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   if (!user) {
     return redirect("/");
   }
-  // eslint-disable-next-line prefer-const
-  let cart: Cart | null = await redis.get(`cart-${user.id}`);
+
+  const cart: Cart | null = await redis.get(`cart-${user.id}`);
 
   const selectedProduct = await prisma.product.findUnique({
     select: {
@@ -242,43 +244,24 @@ export async function addItem(productId: string) {
     throw new Error("No product with this id");
   }
 
-  let myCart = {} as Cart;
+  const myCart = cart ?? {
+    userId: user.id,
+    items: [],
+  };
 
-  if (!cart || !cart.items) {
-    myCart = {
-      userId: user.id,
-      items: [
-        {
-          price: selectedProduct.price,
-          poids: selectedProduct.poids,
-          id: selectedProduct.id,
-          imageString: selectedProduct.images[0],
-          name: selectedProduct.name,
-          quantity: 1,
-        },
-      ],
-    };
+  const existingItem = myCart.items.find((item) => item.id === productId);
+
+  if (existingItem) {
+    existingItem.quantity += quantity;
   } else {
-    let itemFound = false;
-
-    myCart.items = cart.items.map((item) => {
-      if (item.id === productId) {
-        itemFound = true;
-        item.quantity += 1;
-      }
-
-      return item;
+    myCart.items.push({
+      id: selectedProduct.id,
+      poids: selectedProduct.poids,
+      imageString: selectedProduct.images[0],
+      name: selectedProduct.name,
+      price: selectedProduct.price,
+      quantity,
     });
-    if (!itemFound) {
-      myCart.items.push({
-        id: selectedProduct.id,
-        poids: selectedProduct.poids,
-        imageString: selectedProduct.images[0],
-        name: selectedProduct.name,
-        price: selectedProduct.price,
-        quantity: 1,
-      });
-    }
   }
 
   await redis.set(`cart-${user.id}`, myCart);
