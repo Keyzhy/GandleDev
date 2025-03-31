@@ -30,7 +30,7 @@ async function getData(){
     });
 
     const result = data.map((item)=>({
-        date: new Intl.DateTimeFormat('en-GB').format(item.createdAt),
+        date: item.createdAt.toISOString().slice(0, 10), // format 'YYYY-MM-DD'
         revenue: item.amount / 100
     }))
     return result

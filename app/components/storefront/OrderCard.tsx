@@ -34,12 +34,13 @@ export default function OrderCard({ order }: { order: Order }) {
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden transition hover:shadow-lg">
       <div className="p-5 sm:p-6 border-b border-gray-100">
+        {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-4">
           <div>
             <p className="text-sm text-muted-foreground font-medium">
               Numéro de commande
             </p>
-            <p className="font-mono text-sm  font-semibold text-green-500">
+            <p className="font-mono text-sm font-semibold text-green-500">
               {order.orderNumber}
             </p>
           </div>
@@ -51,9 +52,9 @@ export default function OrderCard({ order }: { order: Order }) {
           </div>
         </div>
 
-        {/* Timeline améliorée */}
+        {/* Timeline */}
         <div className="relative w-full max-w-2xl mx-auto mt-8 px-6">
-          {/* Barre de progression derrière les points */}
+          {/* Progress bar */}
           <div className="absolute left-[13%] right-[13%] top-4 h-1 bg-gray-200 z-0 rounded-full">
             <div
               className="h-1 bg-[#BFA48C] rounded-full transition-all duration-500"
@@ -63,7 +64,7 @@ export default function OrderCard({ order }: { order: Order }) {
             />
           </div>
 
-          {/* Points */}
+          {/* Steps */}
           <div className="relative z-10 flex justify-between items-center">
             {statusSteps.map((step, index) => {
               const isCompleted = index <= currentStepIndex;
@@ -90,7 +91,7 @@ export default function OrderCard({ order }: { order: Order }) {
           </div>
         </div>
 
-        {/* Amount */}
+        {/* Total */}
         <div className="mt-6 text-right">
           <p className="text-sm text-gray-600 mb-1">Montant total</p>
           <p className="text-lg font-bold text-gray-900">
@@ -111,14 +112,20 @@ export default function OrderCard({ order }: { order: Order }) {
               className="flex items-center justify-between border-b pb-3 last:border-none"
             >
               <div className="flex items-center gap-4">
-                <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-md overflow-hidden">
-                  <Image
-                    src={item.images[0]}
-                    alt={item.description}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                {item.images[0] ? (
+                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-md overflow-hidden">
+                    <Image
+                      src={item.images[0]}
+                      alt={item.description}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-md bg-gray-100 flex items-center justify-center text-xs text-gray-400">
+                    Pas d’image
+                  </div>
+                )}
                 <div>
                   <p className="text-sm font-medium text-gray-900">
                     {item.description}

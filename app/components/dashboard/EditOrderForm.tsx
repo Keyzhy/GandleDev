@@ -118,7 +118,7 @@ export function EditOrderForm({ orderdata }: iAppProps) {
       doc.setFontSize(12);
       doc.setTextColor(100);
       doc.text(`Date : ${date}`, 20, 40);
-      doc.text(`Commande ID : ${orderdata.id}`, 20, 47);
+      doc.text(`Commande ID : ${orderdata.orderNumber}`, 20, 47);
       doc.text(`Client : ${orderdata.shippingName}`, 20, 54);
       doc.text(`Adresse : ${orderdata.shippingAdressLine1}, ${orderdata.shippingPostalCode} ${orderdata.shippingCity}`, 20, 61);
       doc.line(20, 67, 190, 67);
