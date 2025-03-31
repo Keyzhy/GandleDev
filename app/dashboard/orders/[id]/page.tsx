@@ -5,51 +5,61 @@ import { unstable_noStore as noStore } from "next/cache";
 
 async function getData(orderId: string) {
     const data = await prisma.order.findUnique({
-        where: { id: orderId },
-        select: {
+      where: { id: orderId },
+      select: {
+        id: true,
+        status: true,
+        amount: true,
+        orderNumber: true,
+        createdAt: true,
+        statuscomm: true,
+        shippingName: true,
+        shippingAdressLine1: true,
+        shippingAdressLine2: true,
+        shippingCity: true,
+        shippingPostalCode: true,
+        shippingCountry: true,
+        shippingOption: true,
+        LineItems: true,
+        statusHistory: {
+          orderBy: { changedAt: "desc" },
+          select: {
             id: true,
             status: true,
-            amount: true,
-            createdAt: true,
-            statuscomm: true,
-            shippingName: true,
-            shippingAdressLine1: true,
-            shippingAdressLine2: true,
-            shippingCity: true,
-            shippingPostalCode: true,
-            shippingCountry: true,
-            shippingOption: true,
-            LineItems: true, // Récupère les items de la commande
+            changedAt: true,
+          },
         },
+      },
     });
-
+  
     if (!data) {
-        return notFound();
+      return notFound();
     }
-
-    // Transformer les LineItems pour inclure les images des produits
+  
     const transformedLineItems = await Promise.all(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        data.LineItems.map(async (item: any) => {
-            const product = await prisma.product.findFirst({
-                where: { name: item.description }, // Supposons que "name" correspond au champ de description
-                select: { images: true }, // Sélectionner uniquement les images
-            });
-
-            return {
-                description: item.description || "",
-                quantity: item.quantity || 0,
-                price: item.price || 0,
-                images: product?.images || [], // Ajoute les images du produit ou une liste vide
-            };
-        })
+      data.LineItems.map(async (item: any) => {
+        const product = await prisma.product.findFirst({
+          where: { name: item.description },
+          select: { images: true },
+        });
+  
+        return {
+          description: item.description || "",
+          quantity: item.quantity || 0,
+          price: item.price || 0,
+          images: product?.images || [],
+        };
+      })
     );
-
+  
     return {
-        ...data,
-        LineItems: transformedLineItems,
+      ...data,
+      LineItems: transformedLineItems,
+      history: data.statusHistory, 
     };
-}
+  }
+  
 
 interface Params {
     id: string;

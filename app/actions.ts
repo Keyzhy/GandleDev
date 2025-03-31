@@ -9,6 +9,15 @@ import { Cart } from "./lib/interfaces";
 import { revalidatePath } from "next/cache";
 import { stripe } from "./lib/stripe";
 import Stripe from "stripe";
+import ShippingConfirmationEmail from "@/emails/shippingConfirmationEmail";
+import { Resend } from "resend";
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+function generateOrderNumber() {
+  const random = Math.random().toString(36).substring(2, 8).toUpperCase();
+  const date = new Date().getTime().toString().slice(-4); // ex: "5394"
+  return `GDL-${random}${date}`;
+}
 
 
 export async function createProduct(
@@ -134,6 +143,7 @@ export async function editOrder(previousState: any, formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
+  // Auth check
   if (
     !user ||
     (user.email !== "yannisboulaid1@gmail.com" &&
@@ -142,6 +152,7 @@ export async function editOrder(previousState: any, formData: FormData) {
     return redirect("/");
   }
 
+  // Validate input
   const submission = parseWithZod(formData, {
     schema: orderSchema,
   });
@@ -151,14 +162,52 @@ export async function editOrder(previousState: any, formData: FormData) {
   }
 
   const orderId = formData.get("orderId") as string;
-  await prisma.order.update({
-    where: {
-      id: orderId,
-    },
-    data: {
-      statuscomm: submission.value.statuscomm,
+  const newStatus = submission.value.statuscomm;
+
+  // Get previous status
+  const previous = await prisma.order.findUnique({
+    where: { id: orderId },
+    select: {
+      statuscomm: true,
+      User: { select: { email: true } },
+      shippingName: true,
+      orderNumber: true,
     },
   });
+
+  // Update order status
+  await prisma.order.update({
+    where: { id: orderId },
+    data: {
+      statuscomm: newStatus,
+    },
+  });
+
+  // Save to status history
+  await prisma.orderStatusHistory.create({
+    data: {
+      orderId,
+      status: newStatus,
+    },
+  });
+
+  // Send email if the new status is "communiquetransporteur"
+  if (
+    previous &&
+    previous.statuscomm !== "communiquetransporteur" &&
+    newStatus === "communiquetransporteur" &&
+    previous.User?.email
+  ) {
+    await resend.emails.send({
+      from: `Gandle <${process.env.RESEND_FROM_EMAIL}>`,
+      to: previous.User.email,
+      subject: "Votre commande est en route !",
+      react: ShippingConfirmationEmail({
+        name: previous.shippingName,
+        orderNumber: previous.orderNumber,
+      }),
+    });
+  }
 
   redirect("/dashboard/orders");
 }
@@ -304,7 +353,9 @@ export async function checkOut() {
   let cart: Cart | null = await redis.get(`cart-${user.id}`);
 
   let totalPrice = 0;
-  const orderNumber = crypto.randomUUID();
+  
+  const orderNumber = generateOrderNumber();
+
 
   cart?.items.forEach((item) => {
     totalPrice += item.price * item.quantity;
@@ -399,6 +450,7 @@ export async function checkOut() {
         allowed_countries: ["FR"],
       },
       shipping_options: shippingOptions,
+      customer_email: user.email ?? undefined,
       success_url:
         process.env.NODE_ENV === "development"
           ? `http://localhost:3000/payment/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${orderNumber}`
@@ -408,7 +460,7 @@ export async function checkOut() {
           ? "http://localhost:3000/payment/cancel"
           : "https://gandle-dev.vercel.app/payment/cancel",
       metadata: {
-        orderNumber:orderNumber,
+        orderNumber: orderNumber,
         userId: user.id,
         orderInfo: JSON.stringify(orderInfo),
       },
